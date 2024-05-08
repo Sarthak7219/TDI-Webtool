@@ -1,0 +1,203 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+<style>
+  .login-btn {
+    background-color: var(--color-white);
+    color: var(--bs-dark);
+    border: 3px solid var(--yellow-tdi);
+  }
+
+  .home:hover {
+    color: var(--bs-dark);
+  }
+
+  #tribeDropdown:hover,
+  #districtDropdown:hover {
+    transform: none;
+    color: var(--bs-dark);
+  }
+</style>
+
+<div class="profile-child"></div>
+
+<div class="frame-parent22-profile">
+  <div class="profile-image-frame">
+    {% csrf_token %}
+    <label for="id_profile_pic">
+      <img class="frame-child26-profile" alt=""
+        src="{% if profile.profile_pic %}{{ profile.profile_pic.url }}{% else %}{% static 'images/profile_images/default-profile-pic.png' %}{% endif %}" />
+    </label>
+    <input type="file" name="profile_pic" id="id_profile_pic" style="display: none" />
+  </div>
+
+  <b class="profile-name-head">{{profile.first_name}}</b>
+  <div class="frame-parent23-profile">
+    <div class="my-account-profile-parent-profile">
+      <div class="my-account-profile">My Account</div>
+      <div class="login-btn3">
+        <div class="logout">SETTINGS</div>
+      </div>
+
+      <div class="login-btn3">
+        <div class="edit"><a href="{% url 'profile_edit' %}">Edit</a></div>
+      </div>
+    </div>
+    <div class="frame-parent24-profile">
+      <div class="user-information-parent">
+        <b class="user-information">User Information</b>
+        <div class="frame-parent25-profile">
+          <div class="frame-parent26-profile">
+            <div class="full-name-parent-profile">
+              <div class="profile-credential-head">FULL NAME</div>
+              <div class="profile-credential-box">
+                <div class="profile-credential">
+                  {{profile.first_name}} {{profile.last_name}}
+                </div>
+              </div>
+            </div>
+            <div class="full-name-parent-profile">
+              <div class="profile-credential-head">EMAIl</div>
+              <div class="profile-credential-box">
+                <div class="profile-credential">{{profile.email}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="frame-parent26-profile">
+            <div class="full-name-parent-profile">
+              <div class="profile-credential-head">PHONE NUMBER</div>
+              <div class="profile-credential-box">
+                <div class="profile-credential">{{profile.phone_number}}</div>
+              </div>
+            </div>
+            <div class="full-name-parent-profile">
+              <div class="profile-credential-head">AGE</div>
+              <div class="profile-credential-box">
+                <div class="profile-credential">20</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="user-information-parent">
+        <b class="user-information">MY DATA</b>
+        <div class="frame-parent28-profile">
+
+          {% if excel_files is not None %}
+          <div style="width: 100%;
+              display: flex;
+              flex-direction: column;
+              gap: 30px;
+              align-items: flex-start;">
+            <div class="frame-parent29-profile">
+
+              <div class="full-name-parent-profile">
+                <div class="profile-credential-head">Year</div>
+
+
+                {% if file is None%}
+                <form style="margin: 0px; padding: 0px;" method="POST">
+                  {% csrf_token %}
+                  <select class="profile-credential-box" style="padding: 0px;" name="selected_year">
+
+                    {% for file in excel_files %}
+                    <option value="">--select year--</option>
+                    <option value="{{ file.year }}">{{ file.year }}</option>
+                    {% endfor %}
+
+
+                  </select>
+                  <button type="submit">Submit</button>
+                </form>
+                {% else %}
+                <div class="profile-credential-box">
+                  <div class="profile-credential">
+                    {{file.year}}
+                  </div>
+                </div>
+                {% endif %}
+
+              </div>
+              <div class="full-name-parent-profile">
+                <div class="profile-credential-head">Tribe Data</div>
+                <div class="profile-credential-box">
+                  <div class="profile-credential">
+                    <div class="home" id="tribeDropdown">
+
+                      {% if user_tribes is not None%}
+                      <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        --select tribe--
+                      </div>
+
+                      <ul class="dropdown-menu custom-dropdown" aria-labelledby="tribeDropdown"
+                        style="position: absolute; transform: translate3d(20px, 29px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        {% for tribe in user_tribes %}
+                        <li><a class="dropdown-item"
+                            href="/tribe/{{ tribe.name }}/{{ selected_year }}/?inputted_data=True">
+                            {{tribe.name}} </a></li>
+                        {% endfor %}
+                      </ul>
+
+                      {% else %}
+                      <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        No data available
+                      </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="full-name-parent-profile">
+                <div class="profile-credential-head">District Data</div>
+                <div class="profile-credential-box">
+                  <div class="profile-credential">
+                    <div class="home" id="tribeDropdown">
+
+                      {% if user_districts is not None%}
+                      <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        --select district--
+                      </div>
+
+                      <ul class="dropdown-menu custom-dropdown" aria-labelledby="tribeDropdown"
+                        style="position: absolute; transform: translate3d(20px, 29px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        {% for district in user_districts %}
+                        <li><a class="dropdown-item" href="/district/{{district.slug}}/{{ selected_year}}">
+                            {{district.name}}
+                          </a></li>
+                        {% endfor %}
+                      </ul>
+
+                      {% else %}
+                      <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        No data available
+                      </div>
+                      {% endif %}
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {% if file is not None%}
+            <div class="download-button-div" style="margin: 0px;">
+              <a href="{% url 'download_excel' file.id %}">
+                <button class="login-btn" type="button"
+                  style="position: static; background-color: var(--yellow-tdi); color: white; border: none;">Download
+                  Report</button>
+              </a>
+            </div>
+            {% endif %}
+          </div>
+
+          {% else %}
+          <div>No data inputted yet</div>
+          {% endif %}
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

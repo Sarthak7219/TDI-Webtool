@@ -1,0 +1,179 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Calibri;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>TEST</h1>
+
+    <h2>For Asur :</h2>
+    <h3>
+        Total Number of Tribals : {{total_tribals}}
+    </h3>
+
+    <h3>
+        Tribal Incidence = {{tribe.tribal_incidence}}%
+    </h3>
+    <h3>
+        Tribal Intensity = {{tribe.tribal_intensity}}%
+    </h3>
+    <h3>
+        Tribal Development Index = {{tribe.tribal_index}}
+    </h3>
+
+    <h3>
+        Tribal Dimensional Index :
+    </h3>
+    <ul>
+        {% for i in tribe.tribal_dimensional_index %}
+        <li>Dimensional Index = {{i}}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Dimensional Contribution to TDI</h3>
+    {{tribe.dimension_contribution_to_tdi}}
+    <h3>
+        Indicators Contribution To Dimensions :
+    </h3>
+    {{tribe.indicator_contributions_to_dimension}}
+    <h3>Tribal Incidence : {{tribe.tribal_incidence}}</h3>
+    <h3>Tribal Intensity : {{tribe.tribal_intensity}}</h3>
+    <h3>
+        Dimensional Incidence and Intensities
+    </h3>
+    <ul>
+        {% for i in tribe.tribal_dimensional_incidence %}
+
+        <li>Incidence = {{i}}</li>
+        {% endfor %}
+
+        <br><br>
+        {% for j in tribe.tribal_dimensional_intensity %}
+        <li>Intensity = {{j}}</li>
+
+        {% endfor %}
+    </ul>
+
+
+
+
+
+    <h3>Censored indicator scores</h3>
+    <ul>
+        {% for i in tribe.get_censored_tribal_indicator_score %}
+        <li>indicator_score : {{i}}</li>
+        {% endfor %}
+    </ul>
+    <h3>Uncensored indicator scores</h3>
+    <ul>
+        {% for i in tribe.get_uncensored_tribal_indicator_score %}
+        <li>indicator_score : {{i}}</li>
+        {% endfor %}
+    </ul>
+
+
+
+    <h3> Number of One Dimensionally Developed Households</h3>
+    <ul>
+        {% for i in tribe.total_members_across_onedimensionally_developed_households %}
+        <li>No. of HHs = {{i}}</li>
+        {% endfor %}
+    </ul>
+
+
+
+
+
+
+    {% for i in household %}
+    <hr>
+    <div>
+        <h2>Household {{forloop.counter}}</h2>
+        <ul>
+
+            <li>HH_size = {{i.size}}</li>
+            <li>HH_Score_H_CD : {{i.CD_score}}</li>
+            <li>HH_Score_H_IMM : {{i.IM_score}}</li>
+            <li>household_tribal_incidence = {{i.household_tribal_incidence}}</li>
+            <li>household_tribal_intensity = {{i.household_tribal_intensity}}</li>
+            <h3>Health :</h3>
+            <li>Number of Indicators = {{i.no_of_indicators.0}}</li>
+            <li>Developed Indicators = {{i.developed_indicators.0}}</li>
+            <li>Weightage = {{i.calculate_weightage.0}}</li>
+            <li>Health development score = {{i.D_DS.0}}</li>
+            <li>Is household developed in Health Dimension = {{i.is_developed.0}}</li>
+
+
+            <li>dimensional_incidence = {{i.household_dimensional_incidence.0}}</li>
+
+
+            <li>household_dimensional_intensity = {{i.household_dimensional_intensity.0}}</li>
+
+
+
+
+
+            <h3>Education :</h3>
+            <li>Number of Indicators = {{i.no_of_indicators.1}}</li>
+            <li>LE_score : {{i.LE_score}}</li>
+            <li>DRO_score : {{i.DRO_score}}</li>
+            <li>Developed Indicators = {{i.developed_indicators.1}}</li>
+            <li>Weightage = {{i.calculate_weightage.1}}</li>
+            <li>Education development score = {{i.D_DS.1}}</li>
+            <li>Is household developed in Education Dimension = {{i.is_developed.1}}</li>
+            <li>household_dimensional_incidence = {{i.household_dimensional_incidence.1}}</li>
+            <li>household_dimensional_intensity = {{i.household_dimensional_intensity.1}}</li>
+
+
+
+            <h3>Standard Of Lving :</h3>
+            <li>Number of Indicators = {{i.no_of_indicators.2}}</li>
+            <li>Developed Indicators = {{i.developed_indicators.2}}</li>
+            <li>Weightage = {{i.calculate_weightage.2}}</li>
+            <li>Sol development score = {{i.D_DS.2}}</li>
+            <li>Is household developed in Sol Dimension = {{i.is_developed.2}}</li>
+            <li>household_dimensional_incidence = {{i.household_dimensional_incidence.2}}</li>
+            <li>household_dimensional_intensity = {{i.household_dimensional_intensity.2}}</li>
+
+            <h3>Culture :</h3>
+            <li>Number of Indicators = {{i.no_of_indicators.3}}</li>
+            <li>Developed Indicators = {{i.developed_indicators.3}}</li>
+            <li>Weightage = {{i.calculate_weightage.3}}</li>
+            <li>Culture development score = {{i.D_DS.3}}</li>
+            <li>Is household developed in Culture Dimension = {{i.is_developed.3}}</li>
+            <li>household_dimensional_incidence = {{i.household_dimensional_incidence.3}}</li>
+            <li>household_dimensional_intensity = {{i.household_dimensional_intensity.3}}</li>
+
+            <h3>Governance :</h3>
+            <li>Number of Indicators = {{i.no_of_indicators.4}}</li>
+            <li>Developed Indicators = {{i.developed_indicators.4}}</li>
+            <li>Weightage = {{i.calculate_weightage.4}}</li>
+            <li>Governance development score = {{i.D_DS.4}}</li>
+            <li>Is household developed in Governance Dimension = {{i.is_developed.4}}</li>
+            <li>household_dimensional_incidence = {{i.household_dimensional_incidence.4}}</li>
+            <li>household_dimensional_intensity = {{i.household_dimensional_intensity.4}}</li>
+
+
+            <li>Is HH multidimensionally developed = {{i.is_multidimensionally_developed}}</li>
+            <li>household_tribal_incedence = {{i.household_tribal_incidence}}</li>
+            <li>household_tribal_development_score= {{i.tribal_development_score}}</li>
+
+
+            <li>household_tribal_index = {{i.household_tribal_index}}</li>
+
+        </ul>
+    </div>
+
+    {% endfor %}
+
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <div class="download-container">
+    <p>
+      Download the empty Excel template with column headers:
+      <a href="{% url 'download_template' %}" class="download-link">Download Template</a>
+    </p>
+    <p class="instructions">Fill in the data in the downloaded file and upload it using the form below:</p>
+  </div>
+
+  <div class="important-note">
+    <strong>Note:</strong> It is important to fill in the data in the above-given template.
+  </div>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ formset.management_form }}
+    <label for="id_year">Select Year:</label>
+    <input type="number" name="year" step="any" id="id_year" required placeholder="Year">
+
+    <div class="file_upload_box" id="HH_fileUpload_form">
+      <input type="file" name="households_excel_file" placeholder="Upload excel file" required>
+    </div>
+
+    <hr>
+
+    <button type="submit" class="tribe_form_submit">Submit</button>
+  </form>
+</div>
+
+
+
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+  
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+  
+    .download-container {
+      text-align: center;
+      margin-bottom: 20px;
+      background-color: #f8d7da; /* Red background color for emphasis */
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #f5c6cb; /* Border color to highlight */
+    }
+  
+    .download-link {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #dc3545; /* Dark red background color for the link */
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+  
+    .download-link:hover {
+      background-color: #c82333; /* Slightly darker red on hover */
+    }
+  
+    .important-note {
+      color: #721c24; /* Dark red color for the important note */
+      background-color: #f8d7da; /* Light red background color */
+      border: 1px solid #f5c6cb; /* Border color to match download container */
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+  
+    .instructions {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #666;
+    }
+  
+    form {
+      margin-top: 20px;
+    }
+  
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+  
+    input[type="number"],
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+  
+    hr {
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 20px 0;
+    }
+  
+    .tribe_form_submit {
+      background-color: #008CBA;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+  
+    .tribe_form_submit:hover {
+      background-color: #007AA5;
+    }
+  </style>
+  
+
+{% endblock content %}

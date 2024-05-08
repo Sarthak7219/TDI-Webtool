@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+:root {
+  /* fonts */
+  --font-poppins: Poppins;
+  --font-lexend: Lexend;
+
+  /* font sizes */
+  --font-size-3xs-3: 9.3px;
+  --font-size-4xs-8: 8.8px;
+  --font-size-lg-8: 18.8px;
+  --font-size-5xs-7: 7.7px;
+
+  /* Colors */
+  --color-white: #fff;
+  --color-snow: #faf5f5;
+  --color-black: #000;
+  --color-silver: #b6b6b6;
+
+  /* Gaps */
+  --gap-2xs-6: 10.6px;
+
+  /* Paddings */
+  --padding-5xs: 8px;
+
+  /* Border radiuses */
+  --br-32xl-4: 51.4px;
+}

@@ -1,0 +1,371 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="capture-container">
+    <div class="page1-parent" id="mn">
+        <div class="page1">
+            <div class="frame-parent22">
+                <div class="tribe-logo-name-1-wrapper">
+                    <img class="tribe-logo-name-1-icon" alt="" src="/static/newimages/tribelogoname-1@2x.png" />
+                </div>
+                <div class="frame-parent23">
+                    <div class="frame-parent24"
+                        style="background-image: url(../media/{{tribe.tribe_image.first.main_image}}) !important;">
+                        <div class="frame"></div>
+                        <div class="frame-parent25">
+                            <div class="frame-wrapper3">
+                                <div class="frame-parent26">
+                                    <div class="wrapper">
+                                        <b class="b">{{tribe.tribal_incidence}}%</b>
+                                    </div>
+                                    <div class="incidence-i-wrapper">
+                                        <b class="b">Incidence (I)</b>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="frame-wrapper3">
+                                <div class="frame-parent26">
+                                    <div class="wrapper">
+                                        <b class="b">{{tribe.tribal_intensity}}%</b>
+                                    </div>
+                                    <div class="intensity-a-wrapper">
+                                        <b class="b">Intensity (A)</b>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="frame-wrapper5">
+                                <div class="frame-parent26">
+                                    <div class="wrapper">
+                                        <b class="b">{{tribe.tribal_index}}</b>
+                                    </div>
+                                    <div class="intensity-a-wrapper">
+                                        <b class="b">TDI (IxA)</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="an-asur-man-stands-tall-in-his-parent">
+                        <div class="an-asur-man">
+                            {{tribe.tribe_image.first.main_desc}}
+                        </div>
+                        <div class="image-location-">
+                            {{tribe.tribe_image.first.location}}
+                        </div>
+                        <div class="dop-26th-november">DOP: {{tribe.tribe_image.first.date}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="frame1">
+                <div class="rectangle-wrapper">
+                    <canvas id="vertical-bar-graph" class="vertical-graph"></canvas>
+                </div>
+                <div class="dimensions-wrapper">
+                    <div class="dimensions">DIMENSIONS</div>
+                </div>
+            </div>
+            <div class="frame-parent29">
+                <div class="frame2">
+                    <div class="percentage-contribution-of">
+                        Percentage contribution of Indicator to Dimension
+                    </div>
+                </div>
+                <div class="indicators-wrapper">
+                    <div class="indicators">Indicators</div>
+                </div>
+                <div class="frame-parent30">
+                    <div class="frame-parent31">
+                        <div class=pie-box
+                            style="background-image: url(../media/images/health-icon.png); height: 96px;">
+                            <div class="pie-head">
+                                <div>HEALTH</div>
+                                <div id=my-data-health data-my-data={{indicator_contributions_to_dimension}}></div>
+                            </div>
+                            <!-- <img alt="" src=../media/images/health-icon.png class=pie-chart-frame> -->
+                            <div class=pie-inside-box><!-- LABELS -->
+                                <div class=pie-chart-labels>
+                                    <p class=pie-item id=cd>Chronic Diseases
+                                    <p class=pie-item id=im>Immunisation
+                                    <p class=pie-item id=mc>Maternal Care
+                                    <p class=pie-item id=cm>Child Mortality
+                                </div><!-- ------ --><!-- PIE CHART -->
+                                <div class=pie-icon-1 style="left: 115.04px; top: -8.3px;">
+                                    <canvas id=health-pie></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=pie-box style="background-image: url(../media/images/sol-icon.png);">
+                            <div class="pie-head-sol">
+                                <div>STANDARD OF LIVING</div>
+                                <div id=my-data-sol></div>
+                            </div>
+                            <div class=pie-inside-box><!-- LABELS -->
+                                <div class=pie-chart-labels style="font-size: 7.22px; margin-top: 8px;">
+                                    <p class=pie-item id=ic>Institutional Credit
+                                    <p class=pie-item id=ow>Ownership
+                                    <p class=pie-item id=san>Sanitation
+                                    <p class=pie-item id=fu>Fuel
+                                    <p class=pie-item id=dw>Drinkng Water
+                                    <p class=pie-item id=el>Electricity
+                                </div><!-- ------ --><!-- PIE CHART -->
+                                <div class=pie-icon-1><canvas id=sol-pie></canvas></div><!-- ------ -->
+                            </div>
+                        </div>
+                        <div class=pie-box
+                            style="background-image: url(../media/images/governance-icon.png); height: 94.81px;">
+                            <div class=pie-head>
+                                <div>GOVERNANCE</div>
+                                <div id=my-data-governance></div>
+                            </div>
+                            <div class=pie-inside-box><!-- LABELS -->
+                                <div class=pie-chart-labels>
+                                    <p class=pie-item id=eov>Execution Of Voting Rights
+                                    <p class=pie-item id=pgm>Participation in Government meetings
+                                </div><!-- ------ --><!-- PIE CHART -->
+                                <div class=pie-icon-1 style="left: 113.04px; top: -8.7px;">
+                                    <canvas id=governance-pie></canvas>
+                                </div><!-- ------ -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="frame-parent32">
+                        <div class=pie-box
+                            style="background-image: url(../media/images/education-icon.png); height: 94.8px;">
+                            <div class=pie-head>
+                                <div>EDUCATION</div>
+                                <div id=my-data-education></div>
+                            </div>
+                            <div class=pie-inside-box><!-- LABELS -->
+                                <div class=pie-chart-labels style="left: 111.04px; top: -8.7px;">
+                                    <p class=pie-item id=yos>Years of Schooling
+                                    <p class=pie-item id=do>Drop Out
+                                </div><!-- ------ --><!-- PIE CHART -->
+                                <div class=pie-icon-1><canvas id=education-pie></canvas></div><!-- ------ -->
+                            </div>
+                        </div>
+                        <div class=pie-box style="background-image: url(../media/images/culture-icon.png);">
+                            <div class=pie-head>
+                                <div>CULTURE</div>
+                                <div id=my-data-culture></div>
+                            </div>
+                            <div class=pie-inside-box><!-- LABELS -->
+                                <div class=pie-chart-labels style="top: -10.7px;">
+                                    <p class=pie-item id=lan>Language
+                                    <p class=pie-item id=ar>Arts
+                                </div><!-- ------ --><!-- PIE CHART -->
+                                <div class=pie-icon-1><canvas id=culture-pie></canvas></div><!-- ------ -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="frame-parent33">
+            <div class="frame-parent34">
+                <div class="frame-parent35">
+                    <div class="sample-location-of-sauria-para-wrapper">
+                        <div class="sample-location-of">
+                            Sample Location of Sauria Parahia PVTG
+                        </div>
+                    </div>
+                    <div class="frame-parent36">
+                        <div class="sahebganj-wrapper">
+                            <div class="sample-location-of">Sahebganj</div>
+                        </div>
+                        <div class="village-name-block-name-ke-wrapper">
+                            <div class="village-name-container">
+                                <p class="pie-item">Village Name : Block Name</p>
+                                <p class="kerwa-poopam-gamharia">
+                                    • Kerwa, Poopam, Gamharia, Dovgoda : Taljhari
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="frame3">
+                    <img class="tribe-logo-name-1-icon" alt="" src="../media/{{tribe.tribe_image.first.map_image}}" />
+                </div>
+            </div>
+            <div class="frame-parent34">
+                <div class="sample-location-of-sauria-para-wrapper">
+                    <div class="dimension-wise-development-ind">
+                        Dimension-wise Development Index Score And Overall Tdi Score
+                    </div>
+                </div>
+                <div style="width: 100%; height: 100%; padding: 15px;">
+                    <div style="width: 100%; height: 100%;">
+                        <canvas id="graph2"></canvas>
+                        <div id="my-graph2-data"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="frame-parent38">
+            <div class="frame-parent39">
+                <div class="headcount-ratio-of-each-indica-wrapper">
+                    <div class="headcount-ratio-of">
+                        Headcount Ratio Of Each Indicator
+                    </div>
+                </div>
+                <div class="frame-parent40">
+                    <div class="frame-parent41">
+                        <div class="censored-headcount-ratio-wrapper">
+                            <div class="censored-headcount-ratio">
+                                Censored Headcount Ratio
+                            </div>
+                        </div>
+                        <div class="frame-child17"><canvas id=censored-graph height=579 width=288></canvas>
+                            <div id=my-data_censored1 data-my-data={{tribe.get_censored_tribal_indicator_score.0}}>
+                            </div>
+                            <div id=my-data_censored2 data-my-data={{tribe.get_censored_tribal_indicator_score.1}}>
+                            </div>
+                            <div id=my-data_censored3 data-my-data="{{tribe.get_censored_tribal_indicator_score.2 }}">
+                            </div>
+                            <div id=my-data_censored4 data-my-data="{{ tribe.get_censored_tribal_indicator_score.3}}">
+                            </div>
+                            <div id=my-data_censored5 data-my-data={{tribe.get_censored_tribal_indicator_score.4}}>
+                            </div>
+                            <div id=my-data_censored6 data-my-data={{tribe.get_censored_tribal_indicator_score.5}}>
+                            </div>
+                            <div id=my-data_censored7 data-my-data={{tribe.get_censored_tribal_indicator_score.6}}>
+                            </div>
+                            <div id=my-data_censored8 data-my-data={{tribe.get_censored_tribal_indicator_score.7}}>
+                            </div>
+                            <div id=my-data_censored9 data-my-data={{tribe.get_censored_tribal_indicator_score.8}}>
+                            </div>
+                            <div id=my-data_censored10 data-my-data={{tribe.get_censored_tribal_indicator_score.9}}>
+                            </div>
+                            <div id=my-data_censored11 data-my-data={{tribe.get_censored_tribal_indicator_score.10}}>
+                            </div>
+                            <div id=my-data_censored12 data-my-data={{tribe.get_censored_tribal_indicator_score.11}}>
+                            </div>
+                            <div id=my-data_censored13 data-my-data={{tribe.get_censored_tribal_indicator_score.12}}>
+                            </div>
+                            <div id=my-data_censored14 data-my-data={{tribe.get_censored_tribal_indicator_score.13}}>
+                            </div>
+                            <div id=my-data_censored15 data-my-data={{tribe.get_censored_tribal_indicator_score.14}}>
+                            </div>
+                            <div id=my-data_censored16 data-my-data={{tribe.get_censored_tribal_indicator_score.15}}>
+                            </div>
+                            <div id=my-data_censored17 data-my-data={{tribe.get_censored_tribal_indicator_score.16}}>
+                            </div>
+                            <div id=my-data_censored18 data-my-data={{tribe.get_censored_tribal_indicator_score.17}}>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="frame-parent42">
+                        <div class="censored-headcount-ratio-wrapper">
+                            <div class="censored-headcount-ratio">
+                                Uncensored Headcount Ratio
+                            </div>
+                        </div>
+                        <div class="frame-child17">
+                            <canvas id=uncensored-graph height=579 width=288></canvas>
+                            <div id=my-data_uncensored1 data-my-data={{tribe.get_uncensored_tribal_indicator_score.0}}>
+                            </div>
+                            <div id=my-data_uncensored2 data-my-data={{tribe.get_uncensored_tribal_indicator_score.1}}>
+                            </div>
+                            <div id=my-data_uncensored3
+                                data-my-data="{{tribe.get_uncensored_tribal_indicator_score.2 }}">
+                            </div>
+                            <div id=my-data_uncensored4
+                                data-my-data="{{ tribe.get_uncensored_tribal_indicator_score.3}}">
+                            </div>
+                            <div id=my-data_uncensored5 data-my-data={{tribe.get_uncensored_tribal_indicator_score.4}}>
+                            </div>
+                            <div id=my-data_uncensored6 data-my-data={{tribe.get_uncensored_tribal_indicator_score.5}}>
+                            </div>
+                            <div id=my-data_uncensored7 data-my-data={{tribe.get_uncensored_tribal_indicator_score.6}}>
+                            </div>
+                            <div id=my-data_uncensored8 data-my-data={{tribe.get_uncensored_tribal_indicator_score.7}}>
+                            </div>
+                            <div id=my-data_uncensored9 data-my-data={{tribe.get_uncensored_tribal_indicator_score.8}}>
+                            </div>
+                            <div id=my-data_uncensored10 data-my-data={{tribe.get_uncensored_tribal_indicator_score.9}}>
+                            </div>
+                            <div id=my-data_uncensored11
+                                data-my-data={{tribe.get_uncensored_tribal_indicator_score.10}}>
+                            </div>
+                            <div id=my-data_uncensored12
+                                data-my-data={{tribe.get_uncensored_tribal_indicator_score.11}}>
+                            </div>
+                            <div id=my-data_uncensored13
+                                data-my-data={{tribe.get_uncensored_tribal_indicator_score.12}}>
+                            </div>
+                            <div id=my-data_uncensored14
+                                data-my-data={{tribe.get_uncensored_tribal_indicator_score.13}}>
+                            </div>
+                            <div id=my-data_uncensored15
+                                data-my-data={{tribe.get_uncensored_tribal_indicator_score.14}}>
+                            </div>
+                            <div id=my-data_uncensored16
+                                data-my-data={{tribe.get_uncensored_tribal_indicator_score.15}}>
+                            </div>
+                            <div id=my-data_uncensored17
+                                data-my-data={{tribe.get_uncensored_tribal_indicator_score.16}}>
+                            </div>
+                            <div id=my-data_uncensored18
+                                data-my-data={{tribe.get_uncensored_tribal_indicator_score.17}}>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="frame-parent34">
+                <div class="headcount-ratio-of-each-indica-wrapper">
+                    <div class="headcount-ratio-of">
+                        Sauria Parahia’s vernacular hut, crafted with local materials
+                    </div>
+                </div>
+                <div class="frame-parent44"
+                    style="background-image: url(../media/{{tribe.tribe_image.first.village_image}});">
+                    <div class="saheb-ganj-jharkhand-wrapper">
+                        <div class="saheb-ganj-jharkhand">{{tribe.tribe_image.first.village_desc}}</div>
+                    </div>
+                    <div class="dop-11th-nov-2022-wrapper">
+                        <div class="saheb-ganj-jharkhand">DOP: {{tribe.tribe_image.first.date}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add the following script after your existing HTML content -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <script type="text/javascript">
+        function myfun(pa) {
+            var b = document.body.innerHTML;
+            var d = document.getElementById(pa).innerHTML;
+            document.body.innerHTML = d;
+            window.print();
+        }
+
+        function printPageWithCharts() {
+            // Capture the entire container element
+            var containerElement = document.getElementById('capture-container');
+
+            // Use html2canvas to capture the container element
+            html2canvas(containerElement, { scale: 1 }).then(function (canvas) {
+                // Create a new window to display the captured image
+                var printWindow = window.open();
+                printWindow.document.write("<html><head><title>Print</title></head><body>");
+
+                // Add the captured image to the new window
+                var imageElement = new Image();
+                imageElement.src = canvas.toDataURL("image/png");
+                printWindow.document.write('<img src="' + imageElement.src + '" style="width:100%;">');
+
+                printWindow.document.write("</body></html>");
+                printWindow.document.close();
+
+                // Print the new window
+                printWindow.print();
+            });
+        }
+    </script>
+
+    <button onclick="printPageWithCharts()" class="login-btn" type="button" style="position: static;">Print Page with
+        Chart</button>
+
+    {% endblock %}

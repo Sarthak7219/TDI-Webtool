@@ -1,0 +1,1317 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <title>TDI WebTool</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Noto Sans Hebrew:wght@100;400;500;700;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains Mono:wght@400;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kiwi Maru:wght@500&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="{% static 'newcss/global1.css' %}">
+    <link rel="stylesheet" href="{% static 'newcss/gallery.css' %}">
+    <link rel="stylesheet" href="{% static 'newcss/index1.css' %}">
+    <link rel="stylesheet" href="{% static 'newcss/district-wise.css' %}">
+    <link rel="stylesheet" href="{% static 'newcss/tribe-wise.css' %}">
+    <link rel="stylesheet" href="{% static 'newcss/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'newcss/asurcopy.css' %}">
+    <link rel="stylesheet" href="{% static 'newcss/asurcopy_global.css' %}">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" />
+
+
+</head>
+
+<body>
+    {% if messages %} {% for message in messages %}
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" style="position: absolute;
+        top: 75px;
+        right: 0;">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %} {% endif %}
+
+
+    <div class="main-logo-parent">
+        <div class="main-logo">
+            <b class="tdi-webtool"><a href="{% url 'home' %}">TDI Webtool</a></b>
+        </div>
+        <div class="nav-items">
+
+            <div class="home"><a href="{% url 'home' %}">HOME</a></div>
+            <div class="home" id="tribeDropdown">
+
+                <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    TRIBE
+                </div>
+
+                <ul class="dropdown-menu custom-dropdown" aria-labelledby="tribeDropdown">
+                    {% for tribe in tribes %}
+                    <li><a class="dropdown-item" href="/tribe/{{ tribe.name }}/2022">
+                            {{ tribe.name }}
+                        </a></li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+            <div class="home"><a href="#">RESEARCH</a></div>
+
+            <div class="home" id="districtDropdown">
+                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    DISTRICT
+                </a>
+
+                <ul class="dropdown-menu custom-dropdown">
+                    {% for district in districts %}
+                    <li><a class="dropdown-item" href="/district/{{district.slug}}/{{district.year}}">
+                            {{district.name}}
+                        </a></li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+
+
+            <div class="home"><a href="#about-us-section">ABOUT US</a></div>
+            <div class="home"><a href="{% url 'gallery' %}">GALLERY</a></div>
+        </div>
+        <div style="display: flex;gap: 10px;justify-content: center;align-items: center;">
+            {% if not request.user.is_authenticated %}
+            <div class="login-btn">
+                <div class="login">
+                    <a href="{% url 'login'%}">LOGIN</a>
+                </div>
+            </div>
+            <div class="login-btn"
+                style="color: var(--yellow-tdi); background: none; border: solid 3px var(--yellow-tdi);">
+                <div class="login">
+                    <a href="{% url 'register'%}">REGISTER</a>
+                </div>
+            </div>
+            {% else %}
+
+            <div class="profile-pic">
+                <a href="{% url 'profile' %}">
+                    <img src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}{% static 'images/profile_images/default-profile-pic.png' %}{% endif %}"
+                        class="nav-profile-icon" alt="">
+
+                </a>
+            </div>
+
+
+            <div class="login-btn">
+                <div class="login">
+                    <a href="{% url 'logout'%}">LOGOUT</a>
+                </div>
+            </div>
+
+            {% endif %}
+        </div>
+    </div>
+    <div style="margin-top: 120px;">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+
+    </div>
+</body>
+
+
+<!-- ****** -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+
+<!-- JAVASCRIPT -->
+
+<!-- Home page scroll btn JS -->
+<script>
+    window.onscroll = function () {
+        showScrollButton();
+    };
+
+    function showScrollButton() {
+        var scrollBtn = document.getElementById("scroll-btn");
+        var scrollThreshold = 2000; // Set your threshold here
+        var bodyHeight = Math.max(
+            document.body.scrollHeight,
+            document.body.offsetHeight,
+            document.documentElement.clientHeight,
+            document.documentElement.scrollHeight,
+            document.documentElement.offsetHeight
+        );
+
+        if (window.innerHeight + window.scrollY >= bodyHeight - scrollThreshold) {
+            // If the user is near the bottom of the page, rotate the button
+            scrollBtn.classList.add("rotate");
+        } else {
+            // If the user is not at the bottom, reset the button
+            scrollBtn.classList.remove("rotate");
+        }
+
+        if (
+            document.body.scrollTop > 100 ||
+            document.documentElement.scrollTop > 100
+        ) {
+            // Display the button after scrolling 100 pixels
+            scrollBtn.style.display = "block";
+        } else {
+            // Hide the button if not scrolled enough
+            scrollBtn.style.display = "none";
+        }
+    }
+
+    function scrollFunction() {
+        var bodyHeight = Math.max(
+            document.body.scrollHeight,
+            document.body.offsetHeight,
+            document.documentElement.clientHeight,
+            document.documentElement.scrollHeight,
+            document.documentElement.offsetHeight
+        );
+
+        if (document.getElementById("scroll-btn").classList.contains("rotate")) {
+            // If the button is rotated, scroll to the top
+            window.scrollTo(0, 0);
+        } else {
+            // If the button is not rotated, scroll to the bottom
+            window.scrollTo(0, bodyHeight);
+        }
+    }
+</script>
+
+<!-- ****** -->
+
+<!-- CHART JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"
+    integrity="sha512-JPcRR8yFa8mmCsfrw4TNte1ZvF1e3+1SdGMslZvmrzDYxS69J7J49vkFL8u6u8PlPJK+H3voElBtUCzaXj+6ig=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- ****** -->
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="dropdown"]').dropdown();
+    });
+</script>
+
+
+
+<!-- HOME MAP SCRIPT -->
+<script>
+    $(document).ready(function () {
+        // Attach click event to each SVG group with class 'district-group'
+        $(".district-group").on("click", function () {
+            // Extract district ID from the clicked group's path element
+            var districtId = $(this).find(".district-path").attr("id");
+            console.log(districtId);
+
+            // Redirect to the district page using the district ID
+            window.location.href = "/district/" + districtId + "/2022";
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get all path elements with the class 'district-path'
+        const paths = document.querySelectorAll(".district-path");
+
+        // Get the elements for district name and values
+        const districtNameElement = document.querySelector(".district-name h3");
+        const districtValuesElement = document.querySelector(".district-values");
+
+        // Add mouseover event listener to each path
+        paths.forEach(function (path) {
+            path.addEventListener("mouseover", function () {
+                // Get the id attribute of the path
+                const districtId = path.id;
+
+
+                // Set the district name and values dynamically
+                districtNameElement.textContent = districtId;
+
+
+                // Display the district name and values elements
+                districtNameElement.style.display = "block";
+                districtValuesElement.style.display = "block";
+            });
+
+            // Add mouseout event listener to hide the elements
+            path.addEventListener("mouseout", function () {
+                districtNameElement.style.display = "none";
+                districtValuesElement.style.display = "none";
+            });
+        });
+    });
+</script>
+<!-- ****** -->
+
+
+
+<!-- TRIBE_WISE SCRIPT -->
+<script>
+
+
+
+
+    //DIMENTION CONTRIBUTION VERTICAL BAR
+    // const vertical_bar = {{ tribal_dimensional_index| safe }};
+    const vertical_graph_element = document.getElementById('vertical-bar-graph');
+    var data_health = {{ dimension_contribution_to_tdi.0}};
+    var data_education = {{ dimension_contribution_to_tdi.1}};
+    var data_sol = {{ dimension_contribution_to_tdi.2}};
+    var data_culture = {{ dimension_contribution_to_tdi.3}};
+    var data_goverance = {{ dimension_contribution_to_tdi.4}};
+
+
+
+    const vertical_bar_data = {
+        labels: ['Dimensions'],
+        datasets: [
+            {
+                label: 'Governance', // Removed square brackets
+                data: [data_goverance], // Replace with your actual data for 'Governance'
+                backgroundColor: '#843c0c', // Color for 'Governance'
+            },
+            {
+                label: 'Culture', // Removed square brackets
+                data: [data_culture], // Replace with your actual data for 'Culture'
+                backgroundColor: '#a6a6a6', // Color for 'Culture'
+            },
+            {
+                label: 'Sol', // Removed square brackets
+                data: [data_sol], // Replace with your actual data for 'Sol'
+                backgroundColor: '#bf9000', // Color for 'Sol'
+            },
+            {
+                label: 'Education', // Removed square brackets
+                data: [data_education], // Replace with your actual data for 'Education'
+                backgroundColor: '#548235', // Color for 'Education'
+            },
+            {
+                label: 'Health', // Removed square brackets
+                data: [data_health], // Replace with your actual data for 'Health'
+                backgroundColor: '#2e75b6', // Color for 'Health'
+            },
+        ],
+    };
+
+    const config_vertical_bar = {
+        type: 'bar',
+        data: vertical_bar_data,
+        options: {
+            barPercentage: 1, // To set the width
+            categoryPercentage: 1,
+            indexAxis: 'x',
+            aspectRatio: 0.238, //To set height of the component
+            scales: {
+                x: {
+                    stacked: true,
+                    beginAtZero: true,
+                    display: false
+                },
+                y: {
+                    display: false,
+                    stacked: true,
+                    beginAtZero: true,
+                    // maxTicksLimit: 16,
+                    autoSkip: false,
+                },
+            },
+
+            plugins: {
+                datalabels: {
+                    anchor: 'center', // Center the labels inside the bars
+                    align: 'center', // Align the labels to the center
+                    color: 'white', // Label color
+                    font: {
+                        weight: 'bold', // Label font weight
+                    },
+                    formatter: function (value, context) {
+                        const label = vertical_bar_data.labels[context.dataIndex];
+                        const dataset = vertical_bar_data.datasets[context.datasetIndex];
+                        const colorIndex = context.datasetIndex; // Get the color index
+
+                        // Create a legend string
+                        const legend = dataset.label + ' ' + value + '%';
+
+                        return legend;
+                    },
+                    display: 'auto',
+                },
+                legend: {
+                    display: false, // Hide the legend
+                },
+            },
+        },
+        plugins: [ChartDataLabels]
+    };
+
+
+    const vertical_bar_graph = new Chart(vertical_graph_element, config_vertical_bar);
+
+    //UNSENSORED-GRAPH
+
+    //*******************************************
+
+
+
+
+
+    //UNSENSORED-GRAPH
+    var uncensored_tribe_arr = {{ uncensored_tribe_arr| safe}}; // Create an array to store the data
+
+
+    const uncensored_data = {
+        labels: ['Chronic Disease', 'Immunisation', 'Maternal Care', 'Under 5 child mortality', 'Food Security', 'Level of Education', 'Drop-out', 'Institutional Credit', 'Land Ownership', 'Sanitation', 'Cooking Fuel', 'Source of Drinking Water', 'Electricity', 'Assets', 'Language', 'Arts and Culture', 'Voted', 'Meetings'],
+        datasets: [
+            {
+                label: 'Uncensored',
+                data: uncensored_tribe_arr,
+                fill: false,
+                backgroundColor: [
+                    '#BDD7EE',
+                    '#BDD7EE',
+                    '#BDD7EE',
+                    '#BDD7EE',
+                    '#BDD7EE',
+                    '#C5E0B4',
+                    '#C5E0B4',
+                    '#FFE699',
+                    '#FFE699',
+                    '#FFE699',
+                    '#FFE699',
+                    '#FFE699',
+                    '#FFE699',
+                    '#FFE699',
+                    '#D9D9D9',
+                    '#D9D9D9',
+                    '#F8CBAD',
+                    '#F8CBAD',
+                ],
+                // borderColor: 'rgba(75,192,192,1)',
+                borderWidth: 1,
+            },
+        ],
+    };
+
+    const config_uncensored = {
+        type: 'bar',
+        data: uncensored_data,
+        options: {
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+            scales: {
+                xAxes: [
+                    {
+                        ticks: {
+                            stepSize: 1,
+                            beginAtZero: true,
+                            autoSkip: false,
+
+                        },
+
+                    },
+                ],
+                yAxes: [
+                    {
+                        ticks: {
+                            stepSize: 1,
+                            beginAtZero: true,
+                            maxTicksLimit: 16,
+                            autoSkip: false
+                        },
+
+                    },
+                ],
+
+                x: {
+                    grid: {
+                        drawOnChartArea: false,
+                        display: false
+                    }
+                },
+                y: {
+                    grid: {
+                        drawOnChartArea: false,
+                        display: false
+                    }
+                }
+            },
+
+            plugins: {
+                datalabels: {
+                    anchor: "end",
+                    align: "right"
+                },
+                legend: {
+                    display: false
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    };
+
+    const uncensored_graph = new Chart(document.getElementById('uncensored-graph'), config_uncensored);
+    //*******************************************
+
+
+    //CENSORED-GRAPH
+    var censored_tribe_arr = {{ censored_tribe_arr| safe }}; // Create an array to store the data
+
+    const censored_data = {
+        labels: ['Chronic Disease', 'Immunisation', 'Maternal Care', 'Under 5 child mortality', 'Food Security', 'Level of Education', 'Drop-out', 'Institutional Credit', 'Land Ownership', 'Sanitation', 'Cooking Fuel', 'Source of Drinking Water', 'Electricity', 'Assets', 'Language', 'Arts and Culture', 'Voted', 'Meetings'],
+        datasets: [
+            {
+                label: 'Censored',
+                data: censored_tribe_arr,
+                fill: false,
+                backgroundColor: [
+                    '#BDD7EE',
+                    '#BDD7EE',
+                    '#BDD7EE',
+                    '#BDD7EE',
+                    '#BDD7EE',
+                    '#C5E0B4',
+                    '#C5E0B4',
+                    '#FFE699',
+                    '#FFE699',
+                    '#FFE699',
+                    '#FFE699',
+                    '#FFE699',
+                    '#FFE699',
+                    '#FFE699',
+                    '#D9D9D9',
+                    '#D9D9D9',
+                    '#F8CBAD',
+                    '#F8CBAD',
+                ],
+                // borderColor: 'rgba(75,192,192,1)',
+                borderWidth: 1,
+            },
+        ],
+    };
+
+
+
+    const config_censored = {
+        type: 'bar',
+        data: censored_data,
+
+        options: {
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+            scales: {
+                xAxes: [
+                    {
+                        ticks: {
+                            stepSize: 1,
+                            beginAtZero: true,
+                            // autoSkip: false,
+                        },
+                    },
+                ],
+                yAxes: [
+                    {
+                        ticks: {
+                            stepSize: 1,
+                            beginAtZero: true,
+                            maxTicksLimit: 20,
+                            // autoSkip: false,
+                        },
+                    },
+                ],
+
+                x: {
+                    grid: {
+                        drawOnChartArea: false,
+                        display: false,
+                    }
+                },
+                y: {
+                    grid: {
+                        drawOnChartArea: false,
+                        display: false,
+                    }
+                }
+            },
+            plugins: {
+                datalabels: {
+                    anchor: "end",
+                    align: "right"
+                },
+                legend: {
+                    display: false
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    };
+
+    const censored_graph = new Chart(document.getElementById('censored-graph'), config_censored);
+    //********************************
+
+
+
+    //********************************
+
+
+    //Pie chart health
+
+    var health_data = {{ health_contributions_to_dimension| safe}};
+    const data2 = {
+        labels: ['Chronic Diseases', 'Immunisation', 'Maternal Care', 'Child Mortality', 'Food Security'],
+        datasets: [{
+            label: ['Score'],
+            data: health_data,
+            backgroundColor: [
+                '#315493',
+                '#3b64ad',
+                '#4472c4',
+                '#8fa2d4',
+                '#bac4e2',
+            ],
+            hoverOffset: 4
+        }]
+    };
+
+    const config2 = {
+        type: 'doughnut',
+        data: data2,
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    titleFont: {
+                        size: 11
+                    },
+                    titleMarginBottom: 6,
+                    bodyFont: {
+                        size: 10
+                    }
+                }
+            }
+        }
+    };
+    const health = new Chart(document.getElementById('health-pie'), config2);
+
+
+    //Pie chart education *********
+
+    var education_data = {{ education_contributions_to_dimension| safe}};
+
+    const data3 = {
+        labels: [
+            'Years of Schooling',
+            'Drop Out',
+        ],
+        datasets: [{
+            label: ['Score'],
+            data: education_data,
+            backgroundColor: [
+                '#538233',
+                '#a1c490',
+            ],
+            hoverOffset: 4,
+        }]
+    };
+
+    const config3 = {
+        type: 'doughnut',
+        data: data3,
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    titleFont: {
+                        size: 11
+                    },
+                    titleMarginBottom: 6,
+                    bodyFont: {
+                        size: 10
+                    }
+                }
+            }
+        }
+    };
+    const education = new Chart(document.getElementById('education-pie'), config3);
+
+    //*******************
+
+
+    //Pie chart sol ***********
+
+    var sol_data = {{ sol_contributions_to_dimension| safe}};
+    const data4 = {
+        labels: [
+            'Institutional Credit',
+            'Ownership',
+            'Sanitation',
+            'Fuel',
+            'Drinkng Water',
+            'Electricity',
+            'Assets',
+        ],
+        datasets: [{
+            label: ['Score'],
+            data: sol_data,
+            backgroundColor: [
+                '#c09000',
+                '#e2aa00',
+                '#ffc000',
+                '#ffd184',
+                '#ffe0b5',
+                '#ffd9a0',
+
+            ],
+            hoverOffset: 4
+        }]
+    };
+
+    const config4 = {
+        type: 'doughnut',
+        data: data4,
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    };
+    const sol = new Chart(document.getElementById('sol-pie'), config4);
+
+    //********************
+
+    //Pie chart culture ********
+
+    var culture_data = {{ culture_contributions_to_dimension| safe}};
+    const data5 = {
+        labels: [
+            'Language',
+            'Arts',
+        ],
+        datasets: [{
+            label: ['Score'],
+            data: culture_data,
+            backgroundColor: [
+                '#5f5f5f',
+                '#b2b2b2',
+
+            ],
+            hoverOffset: 4
+        }]
+    };
+
+    const config5 = {
+        type: 'doughnut',
+        data: data5,
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    };
+    const culture = new Chart(document.getElementById('culture-pie'), config5);
+    //**************
+
+
+    //Pie chart governance ******
+
+    var governance_data = {{ governance_contributions_to_dimension| safe}};
+    const data6 = {
+        labels: [
+            'Execution Of Voting Rights',
+            'Participation in Government meetings',
+        ],
+        datasets: [{
+            label: ['Score'],
+            data: governance_data,
+            backgroundColor: [
+                '#f5c7b8',
+                '#f1a78a',
+            ],
+            hoverOffset: 4
+        }]
+    };
+
+    const config6 = {
+        type: 'doughnut',
+        data: data6,
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+
+        // plugins: [ChartDataLabels]
+    };
+    const governance = new Chart(document.getElementById('governance-pie'), config6);
+
+    //************************
+
+
+    //Dimension Index And TDI Graph *********
+    var graph2_data = {{ tribal_dimensional_index| safe }};
+    const ctx = document.getElementById('graph2');
+
+    var tdi = {{ tdi }};
+    var tdiColor = tdi >= 0.50 ? '#92d050' : '#ff0000';
+
+    const data = {
+        labels: ['Health Development Index', 'Education Development Index', 'Sol Development Index', 'Culture Development Index', 'Governance Development Index', 'Tribal Development Index'],
+        datasets: [
+            {
+                data: [...graph2_data, tdi],
+                backgroundColor: [
+                    '#2e75b6',
+                    '#548235',
+                    '#bf9000',
+                    '#a6a6a6',
+                    '#843c0c',
+                    tdiColor,
+                ],
+                borderWidth: 1,
+            },
+        ],
+    };
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: {
+            indexAxis: 'x',
+            scales: {
+                xAxes: [
+                    {
+                        ticks: {
+                            stepSize: 20,
+                            beginAtZero: true,
+                        },
+                    },
+                ],
+                x: {
+                    grid: {
+                        drawOnChartArea: false,
+                        display: false,
+                    },
+                    ticks: {
+                        display: false
+                    }
+                },
+                y: {
+                    ticks: {
+                        stepSize: 0.2
+                    }
+                }
+            },
+            plugins: {
+                datalabels: {
+                    anchor: "end",
+                    align: "top"
+                },
+                legend: {
+                    display: false
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    });
+
+    //**********************
+</script>
+<!-- ****** -->
+
+<!-- DISTRICT SCRIPT -->
+<script>
+
+
+    var myDattadis1Element = document.getElementById('my-data-health-district');
+    var health_data = myDattadis1Element.getAttribute('data-my-data')
+    const datadis1 = {
+
+        datasets: [{
+            label: '',
+            data: {{ health_ind_contri_to_dim }},
+        backgroundColor: [
+            '#315493',
+            '#3B64AD',
+            '#4472C4',
+            '#8FA2D4',
+        ],
+        hoverOffset: 4
+          }]
+        };
+
+    const configdis1 = {
+        type: 'doughnut',
+        data: datadis1,
+        options: {
+            maintainAspectRatio: false,
+        }
+    };
+
+    const health1 = new Chart(document.getElementById('health-pie-district'), configdis1);
+
+
+    var myDattadis2Element = document.getElementById('my-data-education-district');
+    var education_data = myDattadis2Element.getAttribute('data-my-data')
+    const datadis2 = {
+
+        datasets: [{
+            label: '',
+            data: {{ education_ind_contri_to_dim }},
+        backgroundColor: [
+            '#5E813E',
+            '#B9CEAB',
+            '#B9CEAB'
+
+        ],
+        hoverOffset: 4
+          }]
+        };
+
+    const configdis2 = {
+        type: 'doughnut',
+        data: datadis2,
+
+
+    };
+    const eduaction1 = new Chart(document.getElementById('education-pie-district'), configdis2);
+
+    var myDattadis3Element = document.getElementById('my-data-sol-district');
+    var sol_data = myDattadis3Element.getAttribute('data-my-data');
+    const datadis3 = {
+        datasets: [{
+            label: '',
+            data: {{ sol_ind_contri_to_dim }},
+        backgroundColor: [
+            '#B99230',
+            '#D9AC3A',
+            '#F5C242',
+            '#F8D38F',
+        ],
+        hoverOffset: 4
+        }]
+    };
+
+    const configdis3 = {
+        type: 'doughnut',
+        data: datadis3,
+        options: {
+            plugins: {
+                datalabels: {
+                    anchor: 'end',
+                    align: 'right',
+                },
+            },
+        },
+    };
+
+    // Include the correct plugins array format here
+
+
+    const sol1 = new Chart(document.getElementById('sol-pie-district'), configdis3);
+
+
+
+
+    const ctx = document.getElementById('graph2_dis');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Health Development Index', 'Education Development Index', 'Sol Development Index', 'TDI score (Geometric)', ' TDI score (Arithmetic)'],
+            datasets: [{
+                label: '',
+                data: [...{{ district_dimensional_index }}, ...{{ tdi }}],
+        backgroundColor: [
+            '#2e75b6',
+            '#548235',
+            '#bf9000',
+            '#B86029',
+            '#385492',
+            // Color for the additional value
+
+        ],
+        borderWidth: 1
+    }]
+        },
+        options: {
+        indexAxis: 'x',
+        scales: {
+            xAxes: [
+                {
+                    ticks: {
+                        stepSize: 20,
+                        beginAtZero: true,
+                    },
+                },
+            ],
+            x: {
+                grid: {
+                    drawOnChartArea: false,
+                    display: false,
+                },
+                ticks: {
+                    display: false
+                }
+            },
+            y: {
+                ticks: {
+                    stepSize: 0.2
+                }
+            }
+        },
+        plugins: {
+            datalabels: {
+                anchor: "end",
+                align: "top"
+            },
+            legend: {
+                display: false
+            }
+        }
+    },
+        plugins: [ChartDataLabels]
+});
+
+
+
+
+
+
+
+
+    const censored_data_district = {
+        labels: ['BMI', 'Children Under weight', 'Overall Nutrition Score', 'Anaemia-Women', 'Anaemia- children', 'Overall Aneamic Score', 'Antenatal checkup 1st trimister', 'Full Antenatal care', 'Post natal care', 'Overall Maternal Care Score', 'Health Insurance', 'Heath Score', 'ST Enrollment', 'Equity Outcome', 'Drop out', 'Education Score', 'Sanitation', 'Source of Cooking Fuel', 'Source of Drinking water', 'Electricity', 'Standard of Living Score'],
+        datasets: [
+            {
+                label: 'Censored',
+                data: {{ get_score }},
+        fill: false,
+        backgroundColor: [
+            '#E0EBF6',
+            '#E0EBF6',
+            '#A5C2E3',
+            '#E0EBF6',
+            '#E0EBF6',
+            '#A5C2E3',
+            '#E0EBF6',
+            '#E0EBF6',
+            '#E0EBF6',
+            '#A5C2E3',
+            '#A5C2E3',
+            '#4273B1',
+            '#CADFB8',
+            '#CADFB8',
+            '#CADFB8',
+            '#5E813F',
+            '#FBE7A3',
+            '#FBE7A3',
+            '#FBE7A3',
+            '#FBE7A3',
+            '#B89230'
+
+
+        ],
+        // borderColor: 'rgba(75,192,192,1)',
+        borderWidth: 1,
+        barThickness: 18,
+            },
+        ],
+      };
+
+
+
+    const config_censored_district = {
+        type: 'bar',
+        data: censored_data_district,
+        options: {
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+            scales: {
+                xAxes: [
+                    {
+                        ticks: {
+                            stepSize: 1,
+                            beginAtZero: true,
+                            autoSkip: false
+                        },
+                    },
+                ],
+                yAxes: [
+                    {
+                        ticks: {
+                            stepSize: 1,
+                            beginAtZero: true,
+                            maxTicksLimit: 20,
+                            autoSkip: false
+                        },
+                    },
+                ],
+
+                x: {
+                    grid: {
+                        drawOnChartArea: false,
+                        display: false
+                    }
+                },
+                y: {
+                    grid: {
+                        drawOnChartArea: false,
+                        display: false
+                    }
+                }
+            },
+            plugins: {
+                datalabels: {
+                    anchor: "end",
+                    align: "right"
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    };
+
+    const censored_graph_district = new Chart(document.getElementById('censored-graph-district'), config_censored_district);
+
+
+    // District vertical graph
+
+    const vertical_graph_element_district = document.getElementById('vertical-bar-graph-district');
+    var sol_contri_to_tdi = {{ sol_contri_to_tdi }};
+    var education_contri_to_tdi = {{ education_contri_to_tdi }};
+    var health_contri_to_tdi = {{ health_contri_to_tdi }};
+
+
+
+    const vertical_bar_data_district = {
+        labels: ['Dimensions'],
+        datasets: [
+
+            {
+                label: 'Sol', // Removed square brackets
+                data: [sol_contri_to_tdi], // Replace with your actual data for 'Sol'
+                backgroundColor: '#bf9000', // Color for 'Sol'
+            },
+            {
+                label: 'Education', // Removed square brackets
+                data: [education_contri_to_tdi], // Replace with your actual data for 'Education'
+                backgroundColor: '#548235', // Color for 'Education'
+            },
+            {
+                label: 'Health', // Removed square brackets
+                data: [health_contri_to_tdi], // Replace with your actual data for 'Health'
+                backgroundColor: '#2e75b6', // Color for 'Health'
+            },
+        ],
+    };
+
+    const config_vertical_bar_district = {
+        type: 'bar',
+        data: vertical_bar_data_district,
+        options: {
+            barPercentage: 1, // To set the width
+            categoryPercentage: 1,
+            indexAxis: 'x',
+            aspectRatio: 0.238, //To set height of the component
+            scales: {
+                x: {
+                    stacked: true,
+                    beginAtZero: true,
+                    display: false
+                },
+                y: {
+                    display: false,
+                    stacked: true,
+                    beginAtZero: true,
+                    // maxTicksLimit: 16,
+                    autoSkip: false,
+                },
+            },
+
+            plugins: {
+                datalabels: {
+                    anchor: 'center', // Center the labels inside the bars
+                    align: 'center', // Align the labels to the center
+                    color: 'white', // Label color
+                    font: {
+                        weight: 'bold', // Label font weight
+                    },
+                    formatter: function (value, context) {
+                        const label = vertical_bar_data_district.labels[context.dataIndex];
+                        const dataset = vertical_bar_data_district.datasets[context.datasetIndex];
+                        const colorIndex = context.datasetIndex; // Get the color index
+
+                        // Create a legend string
+                        const legend = dataset.label + ' Score,' + value + '%';
+
+                        return legend;
+                    },
+                    display: 'auto',
+                },
+                legend: {
+                    display: false, // Hide the legend
+                },
+            },
+        },
+        plugins: [ChartDataLabels]
+    };
+
+
+    const vertical_bar_graph_district = new Chart(vertical_graph_element_district, config_vertical_bar_district);
+</script>
+<!-- ****** -->
+
+<!-- DISTRICT MAP SCRIPT -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        var slug = "{{ name|safe }}";
+        if (slug) {
+            var pathElement = document.getElementById(slug);
+
+            if (pathElement) {
+                pathElement.classList.add("active");
+            }
+        }
+    });
+
+</script>
+<!-- ****** -->
+
+<!-- PDF SCRIPTS -->
+
+<!-- Load libraries -->
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<!-- Load jsPDF library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+<!-- Your existing scripts -->
+<script type="text/javascript">
+    function myfun(pa) {
+        var b = document.body.innerHTML;
+        var d = document.getElementById(pa).innerHTML;
+        document.body.innerHTML = d;
+        window.print();
+    }
+    window.jsPDF = window.jspdf.jsPDF;
+
+    function downloadPageWithCharts(containerId) {
+        // Capture the entire container element
+        var containerElement = document.getElementById(containerId);
+
+        // Get the dimensions of the container
+        var containerWidth = containerElement.offsetWidth;
+        var containerHeight = containerElement.offsetHeight;
+
+        // Set the dimensions of the canvas to match the container
+        containerElement.style.width = containerWidth + 'px';
+        containerElement.style.height = containerHeight + 'px';
+
+        // Get the download button element
+        var downloadButton = document.getElementById('download-button');
+
+        // Change button content to indicate downloading
+        downloadButton.innerHTML = 'Downloading...';
+
+        // Use html2canvas to capture the container element
+        html2canvas(containerElement, {
+            scale: 2,
+            onclone: function (document) {
+                // Set the willReadFrequently attribute
+                var ctx = document.querySelector('canvas').getContext('2d');
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
+                ctx.willReadFrequently = true;
+            }
+        }).then(function (canvas) {
+            // Create a new jsPDF instance with dimensions matching the canvas
+            var pdf = new jsPDF({ unit: 'px', format: [containerWidth, containerHeight] });
+
+            // Set margins and gaps
+            var marginTop = 100;
+            var marginBottom = 100;
+            var marginLeft = 50;
+            var marginRight = 50;
+
+            // Calculate offsets to center the canvas within the PDF
+            var yOffset = marginTop;
+            var xOffset = (pdf.internal.pageSize.width - (containerWidth * 0.9)) / 2;
+
+            // Scale the canvas before adding it to the PDF
+            var scaledWidth = containerWidth * 0.9;
+            var scaledHeight = containerHeight * 0.9;
+
+            pdf.scale(0.9);
+            pdf.addImage(canvas, 'PNG', xOffset, yOffset, scaledWidth, scaledHeight);
+            pdf.scale(1); // Reset the scale
+
+            // Save the PDF with a specific name
+            pdf.save('TDI_Report.pdf');
+
+            // Change button content back to normal
+            downloadButton.innerHTML = 'Download PDF';
+        });
+
+        // Restore the original dimensions of the container
+        containerElement.style.width = '';
+        containerElement.style.height = '';
+    }
+
+</script>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init({
+        offset: 100,
+        duration: 500,
+    });
+</script>
+<!-- ****** -->
+
+
+</html>

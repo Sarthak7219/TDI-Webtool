@@ -1,0 +1,122 @@
+.frame-child {
+  position: absolute;
+  top: calc(50% - 134.5px);
+  left: calc(50% - 202.5px);
+  border-radius: 16.35px 16.35px 0 16.35px;
+  background-color: #ffa018;
+  box-shadow: 10px 10px 6px 1px rgba(0, 0, 0, 0.2);
+  width: 383px;
+  height: 250.2px;
+  overflow: hidden;
+}
+.confirm-logout,
+.frame-item {
+  position: relative;
+}
+.frame-item {
+  align-self: stretch;
+  border-top: 1.9px solid #314f46;
+  box-sizing: border-box;
+  height: 1.9px;
+}
+.are-you-sure {
+  position: relative;
+  font-size: 14.8px;
+  font-family: var(--font-inter);
+}
+.cancel {
+  position: relative;
+  font-weight: 600;
+}
+.login-btn {
+  width: 55.5px;
+  border-radius: var(--br-6xs-9);
+  background-color: var(--gray);
+  border: 0.6px solid var(--color-darkslategray-100);
+  box-sizing: border-box;
+  height: 20.4px;
+  flex-direction: column;
+  padding: 2.7435216903686523px 0;
+}
+.login-btn,
+.login-btn-parent,
+.login-btn1 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.login-btn1 {
+  border-radius: 24.82px;
+  background-color: var(--blue-tdi);
+  width: 80px;
+  height: 33px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-in-out;
+  box-sizing: border-box;
+  font-size: 11px;
+  cursor: pointer;
+  color: var(--gray);
+  position: relative;
+  font-weight: 600;
+}
+
+.login-btn1:hover{
+  transform: scale(1.1);
+}
+
+
+.login-btn-parent {
+  flex-direction: row;
+  gap: 21.9px;
+  font-size: var(--font-size-3xs-9);
+  color: #30442f;
+}
+.confirm-logout-parent {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 26px;
+}
+.frame-wrapper {
+  position: absolute;
+  top: calc(50% - 109.5px);
+  left: calc(50% - 172.5px);
+  border-radius: 11.41px 11.41px 11.41px 11.41px;
+  background-color: var(--gray);
+  box-shadow: 10px 10px 13px 1px rgba(0, 0, 0, 0.21);
+  width: 366px;
+  height: 244px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40.72239303588867px 45.349937438964844px;
+  box-sizing: border-box;
+}
+.frame-group,
+.frame-parent {
+  width: 405px;
+  position: relative;
+  height: 269px;
+}
+.frame-parent {
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+  margin-top: 150px;
+  color: var(--color-black);
+  font-family: var(--font-poppins);
+}
+
+a{
+  color: inherit;
+  text-decoration: none;
+}

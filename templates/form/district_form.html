@@ -1,0 +1,369 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+  }
+
+  .messages {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    color: #333;
+  }
+
+  .messages li {
+    margin-bottom: 5px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+  }
+
+  .messages .error {
+    color: #d9534f;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+  }
+
+  form {
+    max-width: 600px;
+    margin: 20px auto;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input,
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+
+  .file_upload_box {
+    margin-bottom: 15px;
+  }
+
+  #formset {
+    margin-bottom: 15px;
+  }
+
+  #form {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  #add-form,
+  #remove-form {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  button[type="submit"] {
+    background-color: #337ab7;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+  }
+</style>
+
+
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ formset.management_form }}
+
+  {% if district_form.errors %}
+  <p style="color: red;">There were errors in the form. Please correct them.</p>
+  {% endif %}
+
+  <div>• Add the scores data of each District and find the Tribal Development Index of tribes in that particular
+    District <br>• Note: All data for <b>all Districts</b> at <b>once</b></div><br>
+  <hr><br>
+  <label for="id_year">Year: </label>
+  <span>* Enter the year carefully</span>
+  <input type="number" name="year" step="any" id="id_year" required>
+
+  <select id="entryType_dis" onchange="toggleForms()" required>
+    <option value="" disabled selected hidden>-- Data Input Type</option>
+    <option value="manual">Manual Entry</option>
+    <option value="file">Upload Excel</option>
+  </select>
+
+  <div class="file_upload_box" id="dis_fileUpload_form" style="display: none;">
+    <input type="file" name="district_excel_file" placeholder="Choose file">
+  </div>
+
+  <div id="district_manual_form" style="display: none;">
+    <div id="formset">
+      {% for form in formset %}
+      <div id="form">
+        <label for="id_form-0-name">Name:</label>
+        <select name="form-0-name" id="id_form-0-name" fdprocessedid="isxhvk">
+          {% for district in districts %}
+          <option value="{{district.slug}}">{{district.slug}}</option>
+          {% endfor %}
+        </select>
+
+
+
+        <p>
+          <label for="id_form-0-st_population">St population:</label>
+          <input type="number" name="form-0-st_population" step="any" id="id_form-0-st_population"
+            fdprocessedid="glejfu">
+
+
+        </p>
+
+
+        <p>
+          <label for="id_form-0-total_population">Total population:</label>
+          <input type="number" name="form-0-total_population" step="any" id="id_form-0-total_population"
+            fdprocessedid="2nu804">
+
+
+        </p>
+
+
+        <p>
+          <label for="id_form-0-W_BMI">Women with BMI below normal score:</label>
+          <input type="number" name="form-0-W_BMI" step="any" id="id_form-0-W_BMI" fdprocessedid="c0h97a">
+
+
+        </p>
+
+
+        <p>
+          <label for="id_form-0-C_UW">Children Under weight score:</label>
+          <input type="number" name="form-0-C_UW" step="any" id="id_form-0-C_UW" fdprocessedid="gb1gt">
+
+
+        </p>
+
+
+        <p>
+          <label for="id_form-0-AN_W">Anaemia-Women score:</label>
+          <input type="number" name="form-0-AN_W" step="any" id="id_form-0-AN_W" fdprocessedid="m73un">
+
+
+        </p>
+
+
+        <p>
+          <label for="id_form-0-AN_C">Anaemia- children:</label>
+          <input type="number" name="form-0-AN_C" step="any" id="id_form-0-AN_C" fdprocessedid="358vcq">
+
+
+        </p>
+
+
+        <p>
+          <label for="id_form-0-AHC_ANC">Antenatal checkup 1st trimister:</label>
+          <input type="number" name="form-0-AHC_ANC" step="any" id="id_form-0-AHC_ANC" fdprocessedid="wpwaq9">
+
+
+        </p>
+
+
+        <p>
+          <label for="id_form-0-AHC_Full_ANC">Full Antenatal care score:</label>
+          <input type="number" name="form-0-AHC_Full_ANC" step="any" id="id_form-0-AHC_Full_ANC" fdprocessedid="csaf3m">
+
+
+        </p>
+
+
+        <p>
+          <label for="id_form-0-AHC_PNC">Post natal care score:</label>
+          <input type="number" name="form-0-AHC_PNC" step="any" id="id_form-0-AHC_PNC" fdprocessedid="9iy313j">
+
+
+        </p>
+
+
+        <p>
+          <label for="id_form-0-AHC_HI">Health Insurance score:</label>
+          <input type="number" name="form-0-AHC_HI" step="any" id="id_form-0-AHC_HI" fdprocessedid="9t9wc2">
+
+
+        </p>
+
+
+        <p>
+          <label for="id_form-0-Enrollment">ST Enrollment score:</label>
+          <input type="number" name="form-0-Enrollment" step="any" id="id_form-0-Enrollment" fdprocessedid="mk8n8a">
+
+
+        </p>
+
+
+        <p>
+          <label for="id_form-0-Equity">Equity Outcome score:</label>
+          <input type="number" name="form-0-Equity" step="any" id="id_form-0-Equity" fdprocessedid="cr2mf8">
+
+
+        </p>
+
+
+        <p>
+          <label for="id_form-0-E_DropRate">Drop out score:</label>
+          <input type="number" name="form-0-E_DropRate" step="any" id="id_form-0-E_DropRate" fdprocessedid="zy0fv">
+
+
+        </p>
+
+
+        <p>
+          <label for="id_form-0-S_Sani">Sanitation score:</label>
+          <input type="number" name="form-0-S_Sani" step="any" id="id_form-0-S_Sani" fdprocessedid="nki0g">
+
+
+        </p>
+
+
+        <p>
+          <label for="id_form-0-S_CoFu">Source of Cooking Fuel score:</label>
+          <input type="number" name="form-0-S_CoFu" step="any" id="id_form-0-S_CoFu" fdprocessedid="w2sqd9">
+
+
+        </p>
+
+
+        <p>
+          <label for="id_form-0-S_DrWa">Source of Drinking water score:</label>
+          <input type="number" name="form-0-S_DrWa" step="any" id="id_form-0-S_DrWa" fdprocessedid="984vzc">
+
+
+        </p>
+
+
+        <p>
+          <label for="id_form-0-S_Elec">Electricity score:</label>
+          <input type="number" name="form-0-S_Elec" step="any" id="id_form-0-S_Elec" fdprocessedid="9c6rpp">
+
+
+        </p>
+
+
+        <p>
+          <label for="id_form-0-DELETE">Delete:</label>
+          <input type="checkbox" name="form-0-DELETE" id="id_form-0-DELETE">
+
+
+
+
+        </p>
+        <button type="button" id="add-form">Add Form</button>
+        <button type="button" id="remove-form">Remove Last Form</button>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+ 
+
+  <input type="submit" value="Submit">
+</form>
+<script>
+  // When the "Add Form" button is clicked
+  document.getElementById('add-form').addEventListener('click', function () {
+    // Get the div containing the form elements
+    var formsetDiv = document.getElementById('formset');
+
+    // Get the last form in the formset
+    var lastForm = formsetDiv.lastElementChild;
+
+    // Clone the last form
+    var newForm = lastForm.cloneNode(true);
+
+    // Clear values in the cloned form
+    newForm.querySelectorAll('input, select, textarea').forEach(function (element) {
+      element.value = '';
+    });
+
+    // Increment the form index
+    var formCountField = document.getElementById('id_form-TOTAL_FORMS');
+    var newFormIndex = parseInt(formCountField.value);
+    newFormIndex++;
+    formCountField.value = newFormIndex;
+
+    // Update the IDs of form fields in the cloned form
+    newForm.querySelectorAll('[id]').forEach(function (element) {
+      element.id = element.id.replace(/-\d+/, '-' + (newFormIndex - 1));
+    });
+
+    // Update the names of form fields in the cloned form
+    newForm.querySelectorAll('[name]').forEach(function (element) {
+      element.name = element.name.replace(/-\d+/, '-' + (newFormIndex - 1));
+    });
+    newForm.querySelectorAll('label').forEach(function (label) {
+      var labelFor = label.getAttribute('for');
+      if (labelFor) {
+        label.setAttribute('for', labelFor.replace(/-\d+/, '-' + (newFormIndex - 1)));
+      }
+    });
+    // Append the new form to the formset
+    formsetDiv.appendChild(newForm);
+  });
+
+  document.getElementById('remove-form').addEventListener('click', function () {
+    var formsetDiv = document.getElementById('formset');
+
+    if (formsetDiv.childElementCount > 1) {
+      var lastForm = formsetDiv.lastElementChild;
+      var deleteCheckbox = lastForm.querySelector('[id$="-DELETE"]');
+
+      if (deleteCheckbox) {
+        if (deleteCheckbox.checked) {
+          // Hide the form and disable its inputs
+          lastForm.style.display = 'none';
+          lastForm.querySelectorAll('input, select, textarea').forEach(function (element) {
+            element.disabled = true;
+          });
+        } else {
+          // If not marked for deletion, set the DELETE field to true
+          deleteCheckbox.checked = true;
+        }
+      }
+    }
+  });
+
+
+  function toggleForms() {
+    var entryType = document.getElementById("entryType_dis").value;
+    var manualForm = document.getElementById("district_manual_form");
+    var fileUploadForm = document.getElementById("dis_fileUpload_form");
+    // var slugSelect = document.getElementById("id_form-0-tribeID");
+
+
+    if (entryType === "manual") {
+      manualForm.style.display = "block";
+      fileUploadForm.style.display = "none";
+      // slugSelect.setAttribute("required", "required");
+    } else if (entryType === "file") {
+      manualForm.style.display = "none";
+      fileUploadForm.style.display = "block";
+      // slugSelect.removeAttribute("required");
+    }
+  }
+
+
+</script>
+
+{% endblock content %}

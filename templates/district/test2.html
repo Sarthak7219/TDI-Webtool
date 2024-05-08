@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <style>
+        body {
+            font-family: serif;
+        }
+    </style>
+</head>
+
+<body>
+    <br>
+    <ul>
+        <li>Indicator / Sub Indicator wise MAX and MIN values :<br>
+            MIN = {{max_min_arr.1}}<br>
+            MAX = {{max_min_arr.0}}
+
+        </li>
+        {% for district in districts%}
+        <hr>
+        <li>
+            <p>
+                {{district.get_normalized_final_ind_scores}}
+                Normalized Indicator Scores = {{district.get_normalized_ind_scores}}
+            </p>
+            <p>
+                Dimensional Scores = {{district.get_dimension_scores}}
+            </p>
+            <p>
+                Arithmetic TDI = {{district.get_tdi_score.0}}<br>
+                Geometric TDI = {{district.get_tdi_score.1}}
+            </p>
+            <p>
+                Dimension Contribution to Index = {{district.get_dimension_contribution_tdi}}
+            </p>
+        </li>
+        <br>
+        {%endfor%}
+    </ul>
+
+</body>
+
+</html>

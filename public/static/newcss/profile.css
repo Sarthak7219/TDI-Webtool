@@ -1,0 +1,288 @@
+.profile-child {
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  background-color: var(--yellow-tdi);
+  width: 100%;
+  height: 308px;
+  overflow: hidden;
+  flex-shrink: 0;
+  z-index: 0;
+}
+
+
+.iconamoonprofile-circle-fill {
+  position: relative;
+  border-radius: 21px;
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+}
+
+.iconamoonprofile-circle-fill-parent {
+  position: absolute;
+  top: 29.5px;
+  right: 73.3px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--gap-3xs);
+  font-size: var(--font-size-base-4);
+}
+
+
+.profile-image-frame{
+width: 200px;
+height: 200px;
+justify-content: center;
+align-items: center;
+display: flex;
+z-index: 5;
+}
+
+
+
+.frame-child26-profile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 100px;
+  background: white;
+  border: solid white 12px;
+}
+.profile-name-head {
+  position: relative;
+  letter-spacing: 0.02em;
+}
+.my-account-profile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  letter-spacing: 0.07em;
+  font-weight: 600;
+}
+.login-btn3 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 17.83px;
+  background-color: var(--yellow-tdi);
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-8xs) 18.54924964904785px;
+  box-sizing: border-box;
+  font-size: 12.4px;
+  color: var(--color-white);
+}
+.my-account-profile-parent-profile {
+  position: relative;
+  width: 1068.1px;
+  height: 33px;
+}
+.user-information {
+  align-self: stretch;
+  position: relative;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.profile-credential-head,
+.profile-credential {
+  letter-spacing: 0.07em;
+  font-weight: 500;
+}
+.profile-credential-head {
+  position: relative;
+  text-transform: uppercase;
+}
+.profile-credential {
+  position: absolute;
+  top: calc(50% - 10px);
+  left: 16px;
+}
+.profile-credential-box {
+  align-self: stretch;
+  position: relative;
+  border-radius: var(--br-9xs);
+  background-color: var(--gray);
+  box-shadow: 0 1px 6.7px rgba(0, 0, 0, 0.15);
+  height: 36px;
+  flex-shrink: 0;
+  color: var(--color-gray-400);
+}
+.full-name-parent-profile {
+  width: 325px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-mid);
+}
+.frame-parent26-profile {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.frame-parent25-profile,
+.user-information-parent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.frame-parent25-profile {
+  align-self: stretch;
+  justify-content: center;
+  padding: 0 var(--padding-26xl);
+  gap: var(--gap-33xl);
+  font-size: var(--font-size-smi);
+  color: var(--color-black);
+}
+.user-information-parent {
+  width: 1068px;
+  justify-content: flex-start;
+  gap: var(--gap-11xl);
+}
+.tribe-wise-data-profile {
+  position: relative;
+  letter-spacing: 0.07em;
+  font-weight: 600;
+}
+.tribe-wise-data-profile-wrapper-profile {
+  align-self: stretch;
+  border-radius: var(--br-6xs);
+  background-color: rgba(70, 132, 255, 0.2);
+  border: 1px solid var(--blue-tdi);
+  box-sizing: border-box;
+  height: 73px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.group-icon-profile {
+  position: relative;
+  width: 21.8px;
+  height: 21.8px;
+}
+.add-parent-profile,
+.lets-iconsadd-duotone {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.lets-iconsadd-duotone {
+  align-self: stretch;
+  overflow: hidden;
+  padding: var(--padding-12xs) var(--padding-9xs);
+}
+.add-parent-profile {
+  gap: var(--gap-8xs);
+}
+.frame-wrapper3-profile {
+  align-self: stretch;
+  border-radius: var(--br-6xs);
+  background-color: var(--gray);
+  border: 1px solid var(--color-gray-500);
+  box-sizing: border-box;
+  height: 75px;
+  overflow: hidden;
+  flex-shrink: 0;
+  justify-content: center;
+}
+.district-wise-data-wrapper-profile,
+.frame-wrapper3-profile {
+  display: flex;
+  
+  align-items: center;
+}
+.frame-parent29-profile {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: var(--gap-xl);
+}
+.district-wise-data-wrapper-profile {
+  align-self: stretch;
+  border-radius: var(--br-6xs);
+  background-color: rgba(75, 152, 89, 0.2);
+  border: 1px solid var(--green-tdi);
+  box-sizing: border-box;
+  height: 73px;
+  overflow: hidden;
+  flex-shrink: 0;
+  justify-content: center;
+}
+.frame-parent30-profile {
+  width: 325px;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--gap-xl);
+}
+.frame-parent24-profile,
+.frame-parent28-profile,
+.frame-parent30-profile {
+  display: flex;
+  align-items: flex-start;
+}
+.frame-parent28-profile {
+  align-self: stretch;
+  border: solid 1px grey;
+  border-radius: 10px;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 30px var(--padding-26xl);
+  color: var(--color-gray-400);
+}
+.frame-parent24-profile {
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 87px;
+  font-size: var(--font-size-mini);
+  color: var(--color-gray-300);
+}
+.frame-parent23-profile {
+  border-radius: 12px;
+  background-color: var(--color-white);
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(138, 138, 138, 0.6);
+  padding: 37px 46px;
+  gap: var(--gap-33xl);
+  font-size: 22px;
+  margin-bottom: 100px;
+}
+.frame-parent22-profile,
+.frame-parent23-profile,
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.frame-parent22-profile {
+  gap: 47px;
+  z-index: 2;
+  font-size: 45px;
+  margin-top: 188px;
+  color: var(--color-black);
+}
+.profile {
+  position: relative;
+  background-color: #f9f8f8;
+  width: 100%;
+  overflow: hidden;
+  padding: 0 0 var(--padding-81xl);
+  box-sizing: border-box;
+  gap: 107px;
+  text-align: left;
+  font-size: var(--font-size-16xl-2);
+  color: var(--color-white);
+  font-family: var(--font-poppins);
+}

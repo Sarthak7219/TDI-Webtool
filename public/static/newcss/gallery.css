@@ -1,0 +1,126 @@
+.our-gallery {
+    position: relative;
+    letter-spacing: 0.07em;
+    text-transform: capitalize;
+    font-weight: 800;
+}
+
+.our-gallery-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 35px;
+    color: var(--purple-tdi);
+}
+
+.frame-gallery-child,
+.frame-item-gallery {
+    position: relative;
+    width: 592px;
+    height: 443px;
+}
+
+.frame-item-gallery {
+    background-color: var(--color-gainsboro);
+    width: 286.1px;
+    height: 212px;
+}
+
+.rectangle-parent-gallery,
+.vector-parent-gallery {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.rectangle-parent-gallery {
+    width: 592px;
+    height: 443px;
+    flex-wrap: wrap;
+    gap: 19.71px;
+}
+
+.vector-parent-gallery {
+    gap: 19.71px
+}
+
+.frame-child6-gallery {
+    position: relative;
+    background-color: var(--color-gainsboro);
+    width: 592px;
+    height: 443px;
+}
+
+.frame-container-gallery,
+.frame-wrapper-gallery {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.frame-container-gallery {
+    align-items: flex-start;
+    gap: 25px;
+}
+
+.frame-wrapper-gallery {
+    align-items: flex-end;
+}
+
+.icon-alternate-sign-in-gallery {
+    position: relative;
+    width: 22px;
+    height: 15.3px;
+}
+
+.load-more-parent-gallery {
+    position: absolute;
+    top: 11px;
+    left: 21.4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4.38px;
+}
+
+.frame-wrapper1-gallery {
+    position: relative;
+    border-radius: 27.13px;
+    background-color: var(--purple-tdi);
+    width: 160.7px;
+    height: 42.3px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.frame-group-gallery,
+.frame-parent-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.frame-group-gallery {
+    padding: 0 0 100px;
+    gap: 48px;
+    font-size: 14px;
+    margin-top: 60px;
+    color: var(--color-white);
+}
+
+.frame-parent-gallery {
+    position: relative;
+    background-color: var(--color-white);
+    width: 100%;
+    height: 1492px;
+    overflow: hidden;
+    gap: 100px;
+    text-align: center;
+    font-size: 35.2px;
+    color: #000103;
+    font-family: var(--font-poppins);
+}

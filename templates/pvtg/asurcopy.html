@@ -1,0 +1,591 @@
+{% extends 'base.html' %} {% block content %}
+<div class="page1-parent">
+  <div class="frame-wrapper-asurcopy" id="user-tribe-pdf-page">
+    <div class="frame-group-asurcopy">
+      <div class="asur-parent-asurcopy">
+        <div style="    font-size: 120px; font-weight: bolder;text-transform:uppercase;">{{tribe.name}}</div>
+
+        <div class="frame-container-asurcopy">
+          <div class="frame-div-asurcopy">
+            <div class="frame-parent1-asurcopy">
+              <div class="frame-parent2-asurcopy">
+                <div class="wrapper-asurcopy">
+                  <div class="login-asurcopy">{{incidence}}</div>
+                </div>
+                <div class="tribal-development-index-wrapper-asurcopy">
+                  <div class="login-asurcopy">Tribal Incidence</div>
+                </div>
+              </div>
+              <div class="frame-parent2-asurcopy">
+                <div class="wrapper-asurcopy">
+                  <div class="login-asurcopy">{{intensity}}</div>
+                </div>
+                <div class="tribal-development-index-container-asurcopy">
+                  <div class="login-asurcopy">Tribal Intensity</div>
+                </div>
+              </div>
+              <div class="frame-parent2-asurcopy">
+                <div class="wrapper-asurcopy">
+                  <div class="login-asurcopy">{{tdi}}</div>
+                </div>
+                <div class="tribal-development-index-frame-asurcopy">
+                  <div class="login-asurcopy">Tribal development index</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="frame-parent5-asurcopy">
+            <div class="frame-parent6-asurcopy">
+              <div class="frame-wrapper1-asurcopy">
+                <div class="dimension-wise-development-ind-wrapper-asurcopy">
+                  <div class="dimension-wise-development-ind-asurcopy">
+                    Dimension-wise Development Index Score And Overall Tdi Score
+                  </div>
+                </div>
+              </div>
+              <div class="score-graph-1-wrapper-asurcopy">
+                <canvas id="graph2"></canvas>
+              </div>
+              <div class="graph-color-labels-frame" style="padding: 18px 42px;">
+                <div class="color-labels-div">
+                  <div class="color-labels-wrapper">
+                    <div class="color-label" id="H-label">Health Development Index</div>
+                  </div>
+                  <div class="color-labels-wrapper">
+
+                    <div class="color-label" id="C-label">Culture Development Index</div>
+                  </div>
+                </div>
+                <div class="color-labels-div">
+                  <div class="color-labels-wrapper">
+
+
+                    <div class="color-label" id="E-label">Education Development Index</div>
+                  </div>
+                  <div class="color-labels-wrapper">
+
+
+                    <div class="color-label" id="G-label">Governance Development Index</div>
+                  </div>
+                </div>
+                <div class="color-labels-div">
+                  <div class="color-labels-wrapper">
+
+                    <div class="color-label" id="S-label">SOL Development Index</div>
+                  </div>
+                  <div class="color-labels-wrapper">
+
+                    <div class="color-label" id="T-label">Tribal Development Index</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="frame-parent11-asurcopy">
+              <div class="dimension-contribution-to-tdi-wrapper-asurcopy">
+                <div class="dimension-contribution-to-asurcopy">
+                  Dimension Contribution to TDI
+                </div>
+              </div>
+              <div class="frame-wrapper3-asurcopy">
+                <canvas id="pie-chart"></canvas>
+              </div>
+              <div class="frame-parent12-asurcopy">
+                <div class="frame-parent13-asurcopy">
+                  <div class="parent-asurcopy" style="color: var(--health);">
+                    <div class="div3-asurcopy">
+                      {{ dimension_contribution_to_tdi.0}}%
+                    </div>
+                    <div class="health-asurcopy">Health</div>
+                  </div>
+                  <div class="parent-asurcopy" style="color: var(--education);">
+                    <div class="div3-asurcopy">
+                      {{ dimension_contribution_to_tdi.1}}%
+                    </div>
+                    <div class="health-asurcopy">Education</div>
+                  </div>
+                  <div class="parent-asurcopy" style="color: var(--sol);">
+                    <div class="div3-asurcopy">
+                      {{ dimension_contribution_to_tdi.2}}%
+                    </div>
+                    <div class="health-asurcopy">Standard Of Living</div>
+                  </div>
+                </div>
+                <div class="frame-parent14-asurcopy">
+                  <div class="parent-asurcopy" style="color: var(--culture);">
+                    <div class="div3-asurcopy">
+                      {{ dimension_contribution_to_tdi.3}}%
+                    </div>
+                    <div class="health-asurcopy">Culture</div>
+                  </div>
+                  <div class="parent-asurcopy" style="color: var(--governance);">
+                    <div class="div3-asurcopy">
+                      {{ dimension_contribution_to_tdi.4}}%
+                    </div>
+                    <div class="health-asurcopy">Governance</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="frame-parent15-asurcopy">
+          <div class="percentage-contribution-of-eac-parent-asurcopy">
+            <div class="percentage-contribution-of-asurcopy">
+              Percentage contribution of each Indicator to TDI Score
+            </div>
+            <div class="frame-parent16-asurcopy">
+              <div class="governance-parent-asurcopy">
+                <div class="governance1-asurcopy">Health</div>
+                <div style="height: 230px; padding: 15px;">
+                  <canvas id="health-pie"></canvas>
+                </div>
+              </div>
+              <div class="governance-parent-asurcopy">
+                <div class="governance1-asurcopy">Education</div>
+                <div style="height: 230px; padding: 15px;">
+                  <canvas id="education-pie"></canvas>
+                </div>
+              </div>
+              <div class="governance-parent-asurcopy">
+                <div class="governance1-asurcopy">Standard of living</div>
+                <div style="height: 230px; padding: 15px;">
+                  <canvas id="sol-pie"></canvas>
+                </div>
+              </div>
+              <div class="governance-parent-asurcopy">
+                <div class="governance1-asurcopy">Culture</div>
+                <div style="height: 230px; padding: 15px;">
+                  <canvas id="culture-pie"></canvas>
+                </div>
+              </div>
+              <div class="governance-parent-asurcopy">
+
+                <div class="governance1-asurcopy">Governance</div>
+                <div style="height: 230px; padding: 15px;">
+                  <canvas id="governance-pie"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="download-button-div">
+  <button id="download-button" onclick="downloadPageWithCharts('user-tribe-pdf-page')" class="login-btn" type="button"
+    style="position: absolute; top: 1910px; ">
+    Download PDF
+  </button>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"
+  integrity="sha512-JPcRR8yFa8mmCsfrw4TNte1ZvF1e3+1SdGMslZvmrzDYxS69J7J49vkFL8u6u8PlPJK+H3voElBtUCzaXj+6ig=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+  var dimension_contribution_to_tdi = {{ dimension_contribution_to_tdi }}
+
+  const ver_data = {
+    labels: '',
+    datasets: [{
+      label: 'Contri to TDI',
+      data: dimension_contribution_to_tdi,
+      backgroundColor: [
+        '#2e75b6',
+        '#548235',
+        '#bf9000',
+        '#a6a6a6',
+        '#843c0c',
+      ],
+      hoverOffset: 4,
+
+    }]
+  };
+  const config_vertical_bar = {
+    type: 'pie',
+    data: ver_data,
+
+
+  };
+
+  const vertical_graph_element = document.getElementById('pie-chart');
+
+  const vertical_bar_graph = new Chart(vertical_graph_element, config_vertical_bar);
+
+
+  //********************************
+
+
+  // Pie chart health
+  var health_data = {{ health_contributions_to_dimension| safe}};
+  const data2 = {
+    labels: ['Chronic Diseases', 'Immunisation', 'Maternal Care', 'Child Mortality', 'Food Security'],
+    datasets: [{
+      label: ['Score'],
+      data: health_data,
+      backgroundColor: [
+        '#315493',
+        '#3b64ad',
+        '#4472c4',
+        '#8fa2d4',
+        '#bac4e2',
+      ],
+      hoverOffset: 4
+    }]
+  };
+
+  const config2 = {
+    type: 'doughnut',
+    data: data2,
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          titleFont: {
+            size: 11
+          },
+          titleMarginBottom: 6,
+          bodyFont: {
+            size: 10
+          }
+        }
+      }
+    }
+  };
+  const health = new Chart(document.getElementById('health-pie'), config2);
+
+
+  //Pie chart education *********
+
+  var education_data = {{ education_contributions_to_dimension| safe}};
+
+  const data3 = {
+    labels: [
+      'Years of Schooling',
+      'Drop Out',
+    ],
+    datasets: [{
+      label: ['Score'],
+      data: education_data,
+      backgroundColor: [
+        '#538233',
+        '#a1c490',
+      ],
+      hoverOffset: 4,
+    }]
+  };
+
+  const config3 = {
+    type: 'doughnut',
+    data: data3,
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          titleFont: {
+            size: 11
+          },
+          titleMarginBottom: 6,
+          bodyFont: {
+            size: 10
+          }
+        }
+      }
+    }
+  };
+  const education = new Chart(document.getElementById('education-pie'), config3);
+
+  //*******************
+
+
+  //Pie chart sol ***********
+
+  var sol_data = {{ sol_contributions_to_dimension| safe}};
+  const data4 = {
+    labels: [
+      'Institutional Credit',
+      'Ownership',
+      'Sanitation',
+      'Fuel',
+      'Drinkng Water',
+      'Electricity',
+      'Assets',
+    ],
+    datasets: [{
+      label: 'Score',
+      data: sol_data,
+      backgroundColor: [
+        '#c09000',
+        '#e2aa00',
+        '#ffc000',
+        '#ffd184',
+        '#ffe0b5',
+        '#ffd9a0',
+
+      ],
+      hoverOffset: 4
+    }]
+  };
+
+  const config4 = {
+    type: 'doughnut',
+    data: data4,
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          titleFont: {
+            size: 11
+          },
+          titleMarginBottom: 6,
+          bodyFont: {
+            size: 10
+          }
+        }
+      }
+    }
+  };
+  const sol = new Chart(document.getElementById('sol-pie'), config4);
+
+  //********************
+
+  //Pie chart culture ********
+
+  var culture_data = {{ culture_contributions_to_dimension| safe}};
+  const data5 = {
+    labels: [
+      'Language',
+      'Arts',
+    ],
+    datasets: [{
+      label: 'Score',
+      data: culture_data,
+      backgroundColor: [
+        '#5f5f5f',
+        '#b2b2b2',
+
+      ],
+      hoverOffset: 4
+    }]
+  };
+
+  const config5 = {
+    type: 'doughnut',
+    data: data5,
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          titleFont: {
+            size: 11
+          },
+          titleMarginBottom: 6,
+          bodyFont: {
+            size: 10
+          }
+        }
+      }
+    }
+  };
+  const culture = new Chart(document.getElementById('culture-pie'), config5);
+  //**************
+
+
+  //Pie chart governance ******
+
+  var governance_data = {{ governance_contributions_to_dimension| safe}};
+  const data6 = {
+    labels: [
+      'Execution Of Voting Rights',
+      'Participation in Government meetings',
+    ],
+    datasets: [{
+      label: 'Score',
+      data: governance_data,
+      backgroundColor: [
+        '#f5c7b8',
+        '#f1a78a',
+      ],
+      hoverOffset: 4
+    }]
+  };
+
+  const config6 = {
+    type: 'doughnut',
+    data: data6,
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          titleFont: {
+            size: 11
+          },
+          titleMarginBottom: 6,
+          bodyFont: {
+            size: 10
+          }
+        }
+      }
+    }
+  };
+  const governance = new Chart(document.getElementById('governance-pie'), config6);
+
+  //************************
+
+
+  //Dimension Index And TDI Graph *********
+  var graph2_data = {{ tribal_dimensional_index| safe }};
+  const ctx = document.getElementById('graph2');
+
+  var tdi = {{ tdi| safe  }};
+  var tdiColor = tdi >= 0.50 ? '#92d050' : '#ff0000';
+
+  const data = {
+    labels: ['Health Development Index', 'Education Development Index', 'Sol Development Index', 'Culture Development Index', 'Governance Development Index', 'Tribal Development Index'],
+    datasets: [
+      {
+        data: [...graph2_data, tdi],
+        backgroundColor: [
+          '#2e75b6',
+          '#548235',
+          '#bf9000',
+          '#a6a6a6',
+          '#843c0c',
+          tdiColor,
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+      indexAxis: 'x',
+      scales: {
+        xAxes: [
+          {
+            ticks: {
+              stepSize: 20,
+              beginAtZero: true,
+            },
+          },
+        ],
+        x: {
+          grid: {
+            drawOnChartArea: false,
+            display: false,
+          },
+          ticks: {
+            display: false
+          }
+        },
+        y: {
+          ticks: {
+            stepSize: 0.2
+          }
+        }
+      },
+      plugins: {
+        datalabels: {
+          anchor: "end",
+          align: "top"
+        },
+        legend: {
+          display: false
+        }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  //**********************
+</script>
+
+<script type="text/javascript">
+  function myfun(pa) {
+    var b = document.body.innerHTML;
+    var d = document.getElementById(pa).innerHTML;
+    document.body.innerHTML = d;
+    window.print();
+  }
+  window.jsPDF = window.jspdf.jsPDF;
+
+  function downloadPageWithCharts(containerId) {
+    // Capture the entire container element
+    var containerElement = document.getElementById(containerId);
+
+    // Get the dimensions of the container
+    var containerWidth = containerElement.offsetWidth;
+    var containerHeight = containerElement.offsetHeight;
+
+    // Set the dimensions of the canvas to match the container
+    containerElement.style.width = containerWidth + 'px';
+    containerElement.style.height = containerHeight + 'px';
+
+    // Get the download button element
+    var downloadButton = document.getElementById('download-button');
+
+    // Change button content to indicate downloading
+    downloadButton.innerHTML = 'Downloading...';
+
+    // Use html2canvas to capture the container element
+    html2canvas(containerElement, {
+      scale: 2,
+      onclone: function (document) {
+        // Set the willReadFrequently attribute
+        var ctx = document.querySelector('canvas').getContext('2d');
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.willReadFrequently = true;
+      }
+    }).then(function (canvas) {
+      // Create a new jsPDF instance with dimensions matching the canvas
+      var pdf = new jsPDF({ unit: 'px', format: [containerWidth, containerHeight] });
+
+      // Set margins and gaps
+      var marginTop = 100;
+      var marginBottom = 100;
+      var marginLeft = 50;
+      var marginRight = 50;
+
+      // Calculate offsets to center the canvas within the PDF
+      var yOffset = marginTop;
+      var xOffset = (pdf.internal.pageSize.width - (containerWidth * 0.9)) / 2;
+
+      // Scale the canvas before adding it to the PDF
+      var scaledWidth = containerWidth * 0.9;
+      var scaledHeight = containerHeight * 0.9;
+
+      pdf.scale(0.9);
+      pdf.addImage(canvas, 'PNG', xOffset, yOffset, scaledWidth, scaledHeight);
+      pdf.scale(1); // Reset the scale
+
+      // Save the PDF with a specific name
+      pdf.save('TDI_Report.pdf');
+
+      // Change button content back to normal
+      downloadButton.innerHTML = 'Download PDF';
+    });
+
+    // Restore the original dimensions of the container
+    containerElement.style.width = '';
+    containerElement.style.height = '';
+  }
+
+</script>
+
+{% endblock %}
