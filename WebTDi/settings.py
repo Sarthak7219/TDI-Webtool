@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-na_5rsgjn^vu^!se0ih!o^5h0!wtva1k+50^qa*bbwajcnx32b
 DEBUG = True
 
 # ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['.vercel.app', '.now.sh', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = [ '.onrender.com', '127.0.0.1', 'localhost']
 
 # Corrected setting
 AUTH_USER_MODEL = 'accounts.Profile'
