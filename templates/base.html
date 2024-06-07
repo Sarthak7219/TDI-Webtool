@@ -1241,68 +1241,48 @@
     window.jsPDF = window.jspdf.jsPDF;
 
     function downloadPageWithCharts(containerId) {
-        // Capture the entire container element
         var containerElement = document.getElementById(containerId);
-
-        // Get the dimensions of the container
         var containerWidth = containerElement.offsetWidth;
         var containerHeight = containerElement.offsetHeight;
-
-        // Set the dimensions of the canvas to match the container
         containerElement.style.width = containerWidth + 'px';
         containerElement.style.height = containerHeight + 'px';
-
-        // Get the download button element
         var downloadButton = document.getElementById('download-button');
-
-        // Change button content to indicate downloading
         downloadButton.innerHTML = 'Downloading...';
 
-        // Use html2canvas to capture the container element
         html2canvas(containerElement, {
-            scale: 2,
+            scale: 1, // Reduce the scale factor
             onclone: function (document) {
-                // Set the willReadFrequently attribute
                 var ctx = document.querySelector('canvas').getContext('2d');
                 ctx.imageSmoothingEnabled = true;
                 ctx.imageSmoothingQuality = 'high';
                 ctx.willReadFrequently = true;
             }
         }).then(function (canvas) {
-            // Create a new jsPDF instance with dimensions matching the canvas
+            var imgData = canvas.toDataURL('image/jpeg', 0.75); // Compress image to reduce size
             var pdf = new jsPDF({ unit: 'px', format: [containerWidth, containerHeight] });
 
-            // Set margins and gaps
             var marginTop = 100;
             var marginBottom = 100;
             var marginLeft = 50;
             var marginRight = 50;
 
-            // Calculate offsets to center the canvas within the PDF
             var yOffset = marginTop;
             var xOffset = (pdf.internal.pageSize.width - (containerWidth * 0.9)) / 2;
 
-            // Scale the canvas before adding it to the PDF
             var scaledWidth = containerWidth * 0.9;
             var scaledHeight = containerHeight * 0.9;
 
-            pdf.scale(0.9);
-            pdf.addImage(canvas, 'PNG', xOffset, yOffset, scaledWidth, scaledHeight);
-            pdf.scale(1); // Reset the scale
+            pdf.addImage(imgData, 'JPEG', xOffset, yOffset, scaledWidth, scaledHeight, undefined, 'FAST'); // Use FAST compression
 
-            // Save the PDF with a specific name
             pdf.save('TDI_Report.pdf');
-
-            // Change button content back to normal
             downloadButton.innerHTML = 'Download PDF';
         });
 
-        // Restore the original dimensions of the container
         containerElement.style.width = '';
         containerElement.style.height = '';
     }
-
 </script>
+
 
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>

@@ -1,9 +1,14 @@
 {% extends 'base.html' %} {% block content %}
 <div class="page1-parent">
+
+  <p style="    position: absolute;
+  top: 80px;
+  font-size: 16px;
+  right: 18px;">*Access other Tribes from <b>Profile</b></p>
   <div class="frame-wrapper-asurcopy" id="user-tribe-pdf-page">
     <div class="frame-group-asurcopy">
       <div class="asur-parent-asurcopy">
-        <div style="    font-size: 120px; font-weight: bolder;text-transform:uppercase;">{{tribe.name}}</div>
+        <div style="font-size: 120px; font-weight: bolder;text-transform:uppercase;">{{tribe.name}}</div>
 
         <div class="frame-container-asurcopy">
           <div class="frame-div-asurcopy">
@@ -12,7 +17,7 @@
                 <div class="wrapper-asurcopy">
                   <div class="login-asurcopy">{{incidence}}</div>
                 </div>
-                <div class="tribal-development-index-wrapper-asurcopy">
+                <div class="tribal-development-index-container-asurcopy">
                   <div class="login-asurcopy">Tribal Incidence</div>
                 </div>
               </div>
@@ -28,7 +33,7 @@
                 <div class="wrapper-asurcopy">
                   <div class="login-asurcopy">{{tdi}}</div>
                 </div>
-                <div class="tribal-development-index-frame-asurcopy">
+                <div class="tribal-development-index-container-asurcopy">
                   <div class="login-asurcopy">Tribal development index</div>
                 </div>
               </div>

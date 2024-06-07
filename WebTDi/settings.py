@@ -106,27 +106,27 @@ WSGI_APPLICATION = 'WebTDi.wsgi.application'
 #     }
 # }
 # --->Deployment purpose
-DATABASES = {
+# DATABASES = {
 
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',                     #-----> changed
-        'PASSWORD': 'TLmeJmOlfnfVFNbwOoAMctOFvePOUPkS',       #-----> changed
-        'HOST': 'roundhouse.proxy.rlwy.net',  # or the hostname where your MySQL server is running       #-----> changed
-        'PORT': '36961',      # or the port on which your MySQL server is listening
-    }
-}
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',                     #-----> changed
+#         'PASSWORD': 'TLmeJmOlfnfVFNbwOoAMctOFvePOUPkS',       #-----> changed
+#         'HOST': 'roundhouse.proxy.rlwy.net',  # or the hostname where your MySQL server is running       #-----> changed
+#         'PORT': '36961',      # or the port on which your MySQL server is listening
+#     }
+# }
 
 
 
 # --->Development purpose
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / "db.sqlite3",
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",
+    }
+}
 
 
 
@@ -192,11 +192,11 @@ load_dotenv()
 
 # ADMIN_USER_PHONE_NUMBER = '1234567890'
 ADMIN_USER_PHONE_NUMBER = os.environ.get('ADMIN_USER_PHONE_NUMBER')
-EXCEL_FILE_PATH1 = os.environ.get('EXCEL_FILE_PATH1')
-EXCEL_FILE_PATH2 = os.environ.get('EXCEL_FILE_PATH2')
-EXCEL_FILE_PATH3 = os.environ.get('EXCEL_FILE_PATH3')
-EXCEL_FILE_PATH4 = os.environ.get('EXCEL_FILE_PATH4')
-EXCEL_FILE_PATH5 = os.environ.get('EXCEL_FILE_PATH5')
+# EXCEL_FILE_PATH1 = os.environ.get('EXCEL_FILE_PATH1')
+# EXCEL_FILE_PATH2 = os.environ.get('EXCEL_FILE_PATH2')
+# EXCEL_FILE_PATH3 = os.environ.get('EXCEL_FILE_PATH3')
+# EXCEL_FILE_PATH4 = os.environ.get('EXCEL_FILE_PATH4')
+# EXCEL_FILE_PATH5 = os.environ.get('EXCEL_FILE_PATH5')
 
 
 # Z3B7TYXV3487T87WAD7ZEHNL    Twilio

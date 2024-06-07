@@ -284,7 +284,7 @@ def perform_calculations(base_data_df, user, year):
     # base_data_df.to_excel(settings.EXCEL_FILE_PATH, index=False)
     # print("Result Excel file saved successfully.")
 
-    base_data_df.to_excel(settings.EXCEL_FILE_PATH1, index=False)
+    # base_data_df.to_excel(settings.EXCEL_FILE_PATH1, index=False)
     print("Result Excel file saved successfully.")
 
     total_fid = base_data_df[['__fid__']].values.tolist()
@@ -383,7 +383,7 @@ def perform_calculations(base_data_df, user, year):
         **score_columns
     })
 
-    cum_score_df.to_excel(settings.EXCEL_FILE_PATH2, index=False)
+    # cum_score_df.to_excel(settings.EXCEL_FILE_PATH2, index=False)
     print("Result Excel file saved successfully.")
 
 
@@ -718,10 +718,10 @@ def perform_calculations(base_data_df, user, year):
 
 
 
-    HH_score_df.to_excel(settings.EXCEL_FILE_PATH3, index=False)
+    # HH_score_df.to_excel(settings.EXCEL_FILE_PATH3, index=False)
     print("Result Excel file saved successfully.")
 
-    Tribe_cum_score_df.to_excel(settings.EXCEL_FILE_PATH4, index=False)
+    # Tribe_cum_score_df.to_excel(settings.EXCEL_FILE_PATH4, index=False)
     print("Result Excel file saved successfully.")
 
     import math
@@ -1114,7 +1114,7 @@ def perform_calculations(base_data_df, user, year):
     Final_Excel['G_contri_to_TDI'] = list_G_contri_to_TDI
         
                 
-    Final_Excel.to_excel(settings.EXCEL_FILE_PATH5, index=False)
+    # Final_Excel.to_excel(settings.EXCEL_FILE_PATH5, index=False)
     print("Result Excel file saved successfully.")
 
 
