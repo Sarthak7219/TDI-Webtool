@@ -1,7 +1,7 @@
 # TDI_Webtool
 
-We're developing a website to calculate and display Jharkhand's Tribal
-Development Index using Excel data and user input. My friend and I are
-responsible for the entire project, from design to hosting and SEO, aiming to provide insights into tribal development
+We developed a website to calculate and display the Tribal Development
+Index (TDI) for Jharkhand's tribal communities. This platform leverages
+survey data and user inputs to provide insights into the socio-economic development of these tribes
 
 https://tdi.onrender.com/
