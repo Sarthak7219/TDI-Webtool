@@ -106,27 +106,27 @@ WSGI_APPLICATION = 'WebTDi.wsgi.application'
 #     }
 # }
 # --->Deployment purpose
-DATABASES = {
+# DATABASES = {
 
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',                     #-----> changed
-        'PASSWORD': 'TLmeJmOlfnfVFNbwOoAMctOFvePOUPkS',       #-----> changed
-        'HOST': 'roundhouse.proxy.rlwy.net',  # or the hostname where your MySQL server is running       #-----> changed
-        'PORT': '36961',      # or the port on which your MySQL server is listening
-    }
-}
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',                     #-----> changed
+#         'PASSWORD': 'TLmeJmOlfnfVFNbwOoAMctOFvePOUPkS',       #-----> changed
+#         'HOST': 'roundhouse.proxy.rlwy.net',  # or the hostname where your MySQL server is running       #-----> changed
+#         'PORT': '36961',      # or the port on which your MySQL server is listening
+#     }
+# }
 
 
 
 # --->Development purpose
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / "db.sqlite3",
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",
+    }
+}
 
 
 
