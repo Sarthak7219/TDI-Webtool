@@ -1,7 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from django.contrib import messages
-from django.http import Http404
-from .models import Tribe,Tribe_Image
+from .models import Tribe
 from district_wise.models import District
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model
@@ -9,7 +7,6 @@ User = get_user_model()
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 import pandas as pd
-import numpy as np
 from openpyxl import Workbook
 
 
@@ -221,9 +218,7 @@ def test_view(request):
 
 
 from django.http import HttpResponse
-from io import BytesIO
 import pandas as pd
-import csv
 def download_template(request):
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     response['Content-Disposition'] = 'attachment; filename=household_data_template.xlsx'

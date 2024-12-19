@@ -47,8 +47,6 @@ INSTALLED_APPS = [
     'accounts',
     'district_wise',
     'whitenoise.runserver_nostatic',
-    
-
 ]
 
 MIDDLEWARE = [

@@ -1,11 +1,10 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 
-from import_export import resources, fields
+from import_export import resources
 from import_export.fields import Field
 from import_export.widgets import ForeignKeyWidget
 from .models import  Tribe,Tribe_Image
-from accounts.models import Profile
 from django import forms
 from django.contrib.auth import get_user_model
 

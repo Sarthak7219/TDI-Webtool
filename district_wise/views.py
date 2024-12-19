@@ -1,15 +1,13 @@
 from django.shortcuts import render
 from .models import District
 from django.shortcuts import render,redirect
-from django.contrib import messages
 from home.models import Tribe
-from django.http import HttpResponse, HttpResponseBadRequest, Http404
+from django.http import HttpResponse
 from django.forms import formset_factory
 from .forms import DistrictModelForm
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
 User = get_user_model()
 from tablib import Dataset
 

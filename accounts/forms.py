@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
-from django.contrib.auth.forms import UserChangeForm
 
 class ProfileCreationForm(UserCreationForm):
     phone_number = forms.IntegerField(required=True)

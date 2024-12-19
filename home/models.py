@@ -1,8 +1,4 @@
 from django.db import models
-from django.db.models import Sum
-from django.core.cache import cache
-from django.utils.text import slugify
-from django.utils import timezone
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
